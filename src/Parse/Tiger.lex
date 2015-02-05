@@ -89,6 +89,7 @@ private int commentDepth = 0;
 <YYINITIAL> "nil"        { return tok(sym.NIL); }
 <YYINITIAL> "of"				 { return tok(sym.OF); }
 
+<YYINITIAL> {DIGIT}+ { return tok(sym.INT, new Integer(yytext())); }
 <YYINITIAL> {LETTER}*({LETTER}|{DIGIT}*) { return tok(sym.ID, yytext()); }
 <YYINITIAL> "=" { return tok(sym.EQ, null); }
 <YYINITIAL> "+" { return tok(sym.PLUS, null); }
