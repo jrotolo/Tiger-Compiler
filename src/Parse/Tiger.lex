@@ -49,4 +49,19 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 " "	{}
 \n	{newline();}
 ","	{return tok(sym.COMMA, null);}
+
+<YYINITIAL> "=" { return tok(sym.EQ, null); }
+<YYINITIAL> "+" { return tok(sym.PLUS, null); }
+<YYINITIAL> "-" { return tok(sym.MINUS, null); }
+<YYINITIAL> "*" { return tok(sym.TIMES, null); }
+<YYINITIAL> "/" { return tok(sym.DIVIDE, null); }
+<YYINITIAL> "<>" { return tok(sym.NEQ, null); }
+<YYINITIAL> ">" { return tok(sym.GT, null); }
+<YYINITIAL> "<" { return tok(sym.LT, null); }
+<YYINITIAL> ">=" { return tok(sym.GE, null); }
+<YYINITIAL> "<=" { return tok(sym.LE, null); }
+<YYINITIAL> "&" { return tok(sym.AND, null); }
+<YYINITIAL> "|" { return tok(sym.OR, null); }
+<YYINITIAL> ":=" { return tok(sym.ASSIGN, null); }
+
 . { err("Illegal character: " + yytext()); }

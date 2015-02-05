@@ -216,6 +216,20 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
 		YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = {
@@ -223,8 +237,10 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		0, 0, 1, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
-		2, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 3, 0, 0, 0,
+		2, 0, 0, 0, 0, 0, 3, 0,
+		0, 0, 4, 5, 6, 7, 0, 8,
+		0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 9, 0, 10, 11, 12, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
@@ -232,16 +248,16 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0
+		0, 0, 0, 0, 13, 0, 0, 0
 		
 	};
 	private int yy_rmap[] = {
-		0, 1, 1, 1, 1 
+		0, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 2, 1, 3, 1, 1, 1,
+		1, 1, 4 
 	};
-	private int yy_nxt[][] = unpackFromString(2,4,
-"1,2,3,4,-1:4");
+	private int yy_nxt[][] = unpackFromString(5,14,
+"1,2,3,4,5,6,7,8,9,18,10,11,12,13,-1:25,15,16,-1:12,17,-1:13,14,-1:2");
 	public java_cup.runtime.Symbol nextToken ()
 		throws java.io.IOException {
 		char yy_lookahead;
@@ -306,8 +322,64 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -4:
 						break;
 					case 4:
-						{return tok(sym.COMMA, null);}
+						{ return tok(sym.AND, null); }
 					case -5:
+						break;
+					case 5:
+						{ return tok(sym.TIMES, null); }
+					case -6:
+						break;
+					case 6:
+						{ return tok(sym.PLUS, null); }
+					case -7:
+						break;
+					case 7:
+						{return tok(sym.COMMA, null);}
+					case -8:
+						break;
+					case 8:
+						{ return tok(sym.MINUS, null); }
+					case -9:
+						break;
+					case 9:
+						{ return tok(sym.DIVIDE, null); }
+					case -10:
+						break;
+					case 10:
+						{ return tok(sym.LT, null); }
+					case -11:
+						break;
+					case 11:
+						{ return tok(sym.EQ, null); }
+					case -12:
+						break;
+					case 12:
+						{ return tok(sym.GT, null); }
+					case -13:
+						break;
+					case 13:
+						{ return tok(sym.OR, null); }
+					case -14:
+						break;
+					case 14:
+						{ return tok(sym.ASSIGN, null); }
+					case -15:
+						break;
+					case 15:
+						{ return tok(sym.LE, null); }
+					case -16:
+						break;
+					case 16:
+						{ return tok(sym.NEQ, null); }
+					case -17:
+						break;
+					case 17:
+						{ return tok(sym.GE, null); }
+					case -18:
+						break;
+					case 18:
+						{ err("Illegal character: " + yytext()); }
+					case -19:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
