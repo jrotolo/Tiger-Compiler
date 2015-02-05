@@ -36,6 +36,8 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
   errorMsg=e;
 }
 
+private int commentDepth = 0;
+
 %}
 
 %eofval{
@@ -44,11 +46,26 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
         }
 %eofval}       
 
+%state COMMENT
 
 %%
-" "	{}
-\n	{newline();}
-","	{return tok(sym.COMMA, null);}
+<YYINITIAL> " "	{}
+<YYINITIAL> \n	{ newline(); }
+<YYINITIAL> ","	{ return tok(sym.COMMA, null); }
+
+<YYINITIAL> "/*" { yybegin(COMMENT); }
+<COMMENT> "/*" {
+	commentDepth++;
+	yybegin(COMMENT);
+}
+<COMMENT> "*/" {
+	if (commentDepth <= 0)
+		yybegin(YYINITIAL);
+	else
+		commentDepth--;
+}
+<COMMENT> . { }
+
 
 <YYINITIAL> "while"      { return tok(sym.WHILE); }
 <YYINITIAL> "for"        { return tok(sym.FOR); }

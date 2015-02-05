@@ -73,7 +73,7 @@ private int commentDepth = 0;
 	private final int COMMENT = 1;
 	private final int yy_state_dtrans[] = {
 		0,
-		73
+		76
 	};
 	private void yybegin (int state) {
 		yy_lexical_state = state;
@@ -251,7 +251,13 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
 		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
 		YY_NOT_ACCEPT,
 		YY_NO_ANCHOR,
@@ -274,9 +280,6 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		YY_NOT_ACCEPT,
 		YY_NO_ANCHOR,
 		YY_NOT_ACCEPT,
-		YY_NO_ANCHOR,
-		YY_NOT_ACCEPT,
-		YY_NO_ANCHOR,
 		YY_NOT_ACCEPT,
 		YY_NOT_ACCEPT,
 		YY_NOT_ACCEPT,
@@ -316,15 +319,15 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		1, 2, 3, 1, 4, 1, 1, 1,
 		1, 1, 1, 1, 1, 1, 1, 1,
 		1, 1, 1, 1, 1, 1, 1, 1,
-		1, 1, 1, 1, 5, 6, 7, 8,
-		9, 10, 11, 12, 13, 14, 15, 16,
-		17, 18, 19, 20, 21, 22, 23, 24,
-		25, 26, 27, 28, 29, 30, 31, 32,
-		33, 34, 35, 36, 37, 38, 39, 40,
-		41, 42, 43, 44 
+		1, 1, 1, 1, 1, 1, 5, 6,
+		7, 8, 9, 10, 11, 12, 13, 14,
+		15, 16, 17, 18, 19, 20, 21, 22,
+		23, 24, 25, 26, 27, 28, 29, 30,
+		31, 32, 33, 34, 35, 36, 37, 38,
+		39, 40, 41, 42, 43, 44, 45 
 	};
-	private int yy_nxt[][] = unpackFromString(45,34,
-"1,2,3,4,5,6,7,8,9,37,10,11,12,39,41,1,43,45,47,1,49,1,51,53,1:4,55,1,57,59,1,13,-1:38,14,-1:40,16,17,-1:32,18,-1:48,58,-1:18,15,-1:39,75,-1:42,36,-1:34,60,-1:32,38,-1:23,23,-1:41,19,-1:35,24,-1:29,40,42,-1:33,62,-1:34,44,-1:4,46,-1:32,25,-1:23,20,-1:4,21,-1:32,26,-1:28,48,-1:41,64,-1:28,50,-1:39,27,-1:26,74,-1:4,22,-1:7,52,-1:21,65,-1:26,54,-1:33,66,-1:39,56,-1:31,28,-1:20,35,-1:44,68,-1:41,29,-1:27,30,-1:38,69,-1:43,31,-1:22,32,-1:40,70,-1:22,33,-1:36,71,-1:37,72,-1:32,34,-1:10,1,-1,1:6,61,1:25,-1:17,63,-1:29,67,-1:20");
+	private int yy_nxt[][] = unpackFromString(46,34,
+"1,2,3,4,5,6,7,8,9,39,10,11,12,42,45,1,47,49,51,1,53,1,55,57,1:4,59,1,61,63,1,13,-1:38,14,-1:40,16,17,-1:32,18,-1:48,62,-1:18,15,-1:30,36,-1:42,78,-1:42,38,-1:11,37,-1:56,64,-1:32,41,-1:23,23,-1:41,19,-1:35,24,-1:29,44,46,-1:33,65,-1:34,48,-1:4,50,-1:32,25,-1:23,20,-1:4,21,-1:32,26,-1:28,52,-1:41,67,-1:28,54,-1:39,27,-1:26,77,-1:4,22,-1:7,56,-1:21,68,-1:26,58,-1:33,69,-1:39,60,-1:31,28,-1:31,71,-1:41,29,-1:27,30,-1:38,72,-1:43,31,-1:22,32,-1:40,73,-1:22,33,-1:36,74,-1:37,75,-1:32,34,-1:10,35,-1,35:2,40,35:3,43,35:25,-1:17,66,-1:29,70,-1:20");
 	public java_cup.runtime.Symbol nextToken ()
 		throws java.io.IOException {
 		char yy_lookahead;
@@ -429,7 +432,7 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -14:
 						break;
 					case 14:
-						{ return yybegin(COMMENT); }
+						{ yybegin(COMMENT); }
 					case -15:
 						break;
 					case 15:
@@ -513,63 +516,80 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -35:
 						break;
 					case 35:
+						{ }
+					case -36:
+						break;
+					case 36:
+						{
+	if (commentDepth <= 0)
+		yybegin(YYINITIAL);
+	else
+		commentDepth--;
+}
+					case -37:
+						break;
+					case 37:
 						{
 	commentDepth++;
 	yybegin(COMMENT);
 }
-					case -36:
-						break;
-					case 37:
-						{ err("Illegal character: " + yytext()); }
-					case -37:
+					case -38:
 						break;
 					case 39:
 						{ err("Illegal character: " + yytext()); }
-					case -38:
-						break;
-					case 41:
-						{ err("Illegal character: " + yytext()); }
 					case -39:
 						break;
-					case 43:
-						{ err("Illegal character: " + yytext()); }
+					case 40:
+						{ }
 					case -40:
 						break;
-					case 45:
+					case 42:
 						{ err("Illegal character: " + yytext()); }
 					case -41:
 						break;
-					case 47:
-						{ err("Illegal character: " + yytext()); }
+					case 43:
+						{ }
 					case -42:
 						break;
-					case 49:
+					case 45:
 						{ err("Illegal character: " + yytext()); }
 					case -43:
 						break;
-					case 51:
+					case 47:
 						{ err("Illegal character: " + yytext()); }
 					case -44:
 						break;
-					case 53:
+					case 49:
 						{ err("Illegal character: " + yytext()); }
 					case -45:
 						break;
-					case 55:
+					case 51:
 						{ err("Illegal character: " + yytext()); }
 					case -46:
 						break;
-					case 57:
+					case 53:
 						{ err("Illegal character: " + yytext()); }
 					case -47:
 						break;
-					case 59:
+					case 55:
 						{ err("Illegal character: " + yytext()); }
 					case -48:
 						break;
-					case 61:
+					case 57:
 						{ err("Illegal character: " + yytext()); }
 					case -49:
+						break;
+					case 59:
+						{ err("Illegal character: " + yytext()); }
+					case -50:
+						break;
+					case 61:
+						{ err("Illegal character: " + yytext()); }
+					case -51:
+						break;
+					case 63:
+						{ err("Illegal character: " + yytext()); }
+					case -52:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
