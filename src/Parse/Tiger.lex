@@ -45,8 +45,29 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 %eofval}       
 
 
+
+
 %%
-" "	{}
-\n	{newline();}
-","	{return tok(sym.COMMA, null);}
+<YYINITAL> " "	{}
+<YYINITAL> \n	{ newline(); }
+<YYINITAL> ","	{ return tok(sym.COMMA, null); }
+
+// Keywords
+<YYINITAL> "while"      { return tok(sym.WHILE); }
+<YYINITAL> "for"        { return tok(sym.FOR); }
+<YYINITAL> "to"         { return tok(sym.TO); }
+<YYINITAL> "break"      { return tok(sym.BREAK); }
+<YYINITAL> "let"        { return tok(sym.LET); }
+<YYINITAL> "in"         { return tok(sym.IN); }
+<YYINITAL> "end"        { return tok(sym.END); }
+<YYINITAL> "function"   { return tok(sym.FUNCTION); }
+<YYINITAL> "var"        { return tok(sym.VAR); }
+<YYINITAL> "type"       { return tok(sym.TYPE); }
+<YYINITAL> "array"      { return tok(sym.ARRAY); }
+<YYINITAL> "if"         { return tok(sym.IF); }
+<YYINITAL> "then"       { return tok(sym.THEN); }
+<YYINITAL> "else"       { return tok(sym.ELSE); }
+<YYINITAL> "do"         { return tok(sym.DO); }
+<YYINITAL> "nil"        { return tok.NIL); }
+
 . { err("Illegal character: " + yytext()); }
