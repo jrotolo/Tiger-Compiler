@@ -53,11 +53,18 @@ private int commentDepth = 0;
 <YYINITIAL> \n	{ newline(); }
 <YYINITIAL> ","	{ return tok(sym.COMMA, null); }
 
-<YYINITIAL> "/*" { return yybegin(COMMENT); }
+<YYINITIAL> "/*" { yybegin(COMMENT); }
 <COMMENT> "/*" {
 	commentDepth++;
 	yybegin(COMMENT);
 }
+<COMMENT> "*/" {
+	if (commentDepth <= 0)
+		yybegin(YYINITIAL);
+	else
+		commentDepth--;
+}
+<COMMENT> . { }
 
 
 <YYINITIAL> "while"      { return tok(sym.WHILE); }
