@@ -46,9 +46,9 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 
 
 %%
-" "	{}
-\n	{newline();}
-","	{return tok(sym.COMMA, null);}
+<YYINITIAL> " "	{}
+<YYINITIAL> \n	{ newline(); }
+<YYINITIAL> ","	{ return tok(sym.COMMA, null); }
 
 <YYINITIAL> "while"      { return tok(sym.WHILE); }
 <YYINITIAL> "for"        { return tok(sym.FOR); }
