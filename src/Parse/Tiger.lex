@@ -48,26 +48,25 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 
 
 %%
-<YYINITAL> " "	{}
-<YYINITAL> \n	{ newline(); }
-<YYINITAL> ","	{ return tok(sym.COMMA, null); }
+<YYINITIAL> " "	{}
+<YYINITIAL> \n	{ newline(); }
+<YYINITIAL> ","	{ return tok(sym.COMMA, null); }
 
-// Keywords
-<YYINITAL> "while"      { return tok(sym.WHILE); }
-<YYINITAL> "for"        { return tok(sym.FOR); }
-<YYINITAL> "to"         { return tok(sym.TO); }
-<YYINITAL> "break"      { return tok(sym.BREAK); }
-<YYINITAL> "let"        { return tok(sym.LET); }
-<YYINITAL> "in"         { return tok(sym.IN); }
-<YYINITAL> "end"        { return tok(sym.END); }
-<YYINITAL> "function"   { return tok(sym.FUNCTION); }
-<YYINITAL> "var"        { return tok(sym.VAR); }
-<YYINITAL> "type"       { return tok(sym.TYPE); }
-<YYINITAL> "array"      { return tok(sym.ARRAY); }
-<YYINITAL> "if"         { return tok(sym.IF); }
-<YYINITAL> "then"       { return tok(sym.THEN); }
-<YYINITAL> "else"       { return tok(sym.ELSE); }
-<YYINITAL> "do"         { return tok(sym.DO); }
-<YYINITAL> "nil"        { return tok.NIL); }
+<YYINITIAL> "while"      { return tok(sym.WHILE); }
+<YYINITIAL> "for"        { return tok(sym.FOR); }
+<YYINITIAL> "to"         { return tok(sym.TO); }
+<YYINITIAL> "break"      { return tok(sym.BREAK); }
+<YYINITIAL> "let"        { return tok(sym.LET); }
+<YYINITIAL> "in"         { return tok(sym.IN); }
+<YYINITIAL> "end"        { return tok(sym.END); }
+<YYINITIAL> "function"   { return tok(sym.FUNCTION); }
+<YYINITIAL> "var"        { return tok(sym.VAR); }
+<YYINITIAL> "type"       { return tok(sym.TYPE); }
+<YYINITIAL> "array"      { return tok(sym.ARRAY); }
+<YYINITIAL> "if"         { return tok(sym.IF); }
+<YYINITIAL> "then"       { return tok(sym.THEN); }
+<YYINITIAL> "else"       { return tok(sym.ELSE); }
+<YYINITIAL> "do"         { return tok(sym.DO); }
+<YYINITIAL> "nil"        { return tok(sym.NIL); }
 
 . { err("Illegal character: " + yytext()); }

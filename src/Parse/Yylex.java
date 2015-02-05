@@ -216,7 +216,60 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
-		YY_NO_ANCHOR
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NO_ANCHOR,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT,
+		YY_NOT_ACCEPT
 	};
 	private int yy_cmap[] = {
 		0, 0, 0, 0, 0, 0, 0, 0,
@@ -231,17 +284,24 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 0, 0, 0
+		0, 4, 5, 6, 7, 8, 9, 0,
+		10, 11, 0, 12, 13, 0, 14, 15,
+		16, 0, 17, 18, 19, 20, 21, 22,
+		0, 23, 0, 0, 0, 0, 0, 0
 		
 	};
 	private int yy_rmap[] = {
-		0, 1, 1, 1, 1 
+		0, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 2, 3, 4,
+		5, 6, 7, 8, 9, 10, 11, 12,
+		13, 14, 15, 16, 17, 18, 19, 20,
+		21, 22, 23, 24, 25, 26, 27, 28,
+		29, 30, 31, 32, 33, 34, 35, 36,
+		37, 38 
 	};
-	private int yy_nxt[][] = unpackFromString(2,4,
-"1,2,3,4,-1:4");
+	private int yy_nxt[][] = unpackFromString(39,24,
+"1,2,3,4,22,24,1,26,28,30,1,32,1,34,36,1:4,38,1,40,42,1,-1:41,43,-1:23,21,-1:14,57,-1:32,23,-1:24,44,-1:20,5,-1:15,9,-1:29,25,27,-1:26,10,-1:21,29,-1:4,31,-1:17,45,-1:18,6,-1:4,7,-1:28,11,-1:12,33,-1:28,12,-1:21,35,-1:28,47,-1:17,56,-1:4,8,-1:7,37,-1:17,13,-1:10,39,-1:30,48,-1:22,41,-1:17,49,-1:27,14,-1:21,51,-1:31,15,-1:17,16,-1:28,52,-1:33,17,-1:12,18,-1:30,53,-1:12,19,-1:26,54,-1:27,55,-1:22,20,-1:17,46,-1:19,50,-1:19");
 	public java_cup.runtime.Symbol nextToken ()
 		throws java.io.IOException {
 		char yy_lookahead;
@@ -298,7 +358,7 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -2:
 						break;
 					case 2:
-						{newline();}
+						{ newline(); }
 					case -3:
 						break;
 					case 3:
@@ -306,8 +366,116 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -4:
 						break;
 					case 4:
-						{return tok(sym.COMMA, null);}
+						{ return tok(sym.COMMA, null); }
 					case -5:
+						break;
+					case 5:
+						{ return tok(sym.DO); }
+					case -6:
+						break;
+					case 6:
+						{ return tok(sym.IF); }
+					case -7:
+						break;
+					case 7:
+						{ return tok(sym.IN); }
+					case -8:
+						break;
+					case 8:
+						{ return tok(sym.TO); }
+					case -9:
+						break;
+					case 9:
+						{ return tok(sym.END); }
+					case -10:
+						break;
+					case 10:
+						{ return tok(sym.FOR); }
+					case -11:
+						break;
+					case 11:
+						{ return tok(sym.LET); }
+					case -12:
+						break;
+					case 12:
+						{ return tok(sym.NIL); }
+					case -13:
+						break;
+					case 13:
+						{ return tok(sym.VAR); }
+					case -14:
+						break;
+					case 14:
+						{ return tok(sym.ELSE); }
+					case -15:
+						break;
+					case 15:
+						{ return tok(sym.THEN); }
+					case -16:
+						break;
+					case 16:
+						{ return tok(sym.TYPE); }
+					case -17:
+						break;
+					case 17:
+						{ return tok(sym.ARRAY); }
+					case -18:
+						break;
+					case 18:
+						{ return tok(sym.BREAK); }
+					case -19:
+						break;
+					case 19:
+						{ return tok(sym.WHILE); }
+					case -20:
+						break;
+					case 20:
+						{ return tok(sym.FUNCTION); }
+					case -21:
+						break;
+					case 22:
+						{ err("Illegal character: " + yytext()); }
+					case -22:
+						break;
+					case 24:
+						{ err("Illegal character: " + yytext()); }
+					case -23:
+						break;
+					case 26:
+						{ err("Illegal character: " + yytext()); }
+					case -24:
+						break;
+					case 28:
+						{ err("Illegal character: " + yytext()); }
+					case -25:
+						break;
+					case 30:
+						{ err("Illegal character: " + yytext()); }
+					case -26:
+						break;
+					case 32:
+						{ err("Illegal character: " + yytext()); }
+					case -27:
+						break;
+					case 34:
+						{ err("Illegal character: " + yytext()); }
+					case -28:
+						break;
+					case 36:
+						{ err("Illegal character: " + yytext()); }
+					case -29:
+						break;
+					case 38:
+						{ err("Illegal character: " + yytext()); }
+					case -30:
+						break;
+					case 40:
+						{ err("Illegal character: " + yytext()); }
+					case -31:
+						break;
+					case 42:
+						{ err("Illegal character: " + yytext()); }
+					case -32:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
