@@ -50,9 +50,8 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 \n	{newline();}
 ","	{return tok(sym.COMMA, null);}
 
-// Operators
 <YYINITIAL> "=" { return tok(sym.EQ, null); }
-<YYINITIAL> "+" { return tok(sym.ADD, null); }
+<YYINITIAL> "+" { return tok(sym.PLUS, null); }
 <YYINITIAL> "-" { return tok(sym.MINUS, null); }
 <YYINITIAL> "*" { return tok(sym.TIMES, null); }
 <YYINITIAL> "/" { return tok(sym.DIVIDE, null); }
