@@ -3,3 +3,5 @@ CS4351/
 CS4351/*
 *.class
 *.tig
+src/Parse/*.class
+Yylex.java
