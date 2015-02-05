@@ -3,6 +3,9 @@ import ErrorMsg.ErrorMsg;
 
 %% 
 
+DIGIT=	[0-9_]
+LETTER=	[a-zA-z]
+
 %implements Lexer
 %function nextToken
 %type java_cup.runtime.Symbol
@@ -49,7 +52,7 @@ private int commentDepth = 0;
 %state COMMENT
 
 %%
-<YYINITIAL> " "	{}
+<YYINITIAL> " "	{ }
 <YYINITIAL> \n	{ newline(); }
 <YYINITIAL> ","	{ return tok(sym.COMMA, null); }
 
@@ -65,6 +68,7 @@ private int commentDepth = 0;
 		commentDepth--;
 }
 <COMMENT> . { }
+
 
 
 <YYINITIAL> "while"      { return tok(sym.WHILE); }
@@ -84,6 +88,7 @@ private int commentDepth = 0;
 <YYINITIAL> "do"         { return tok(sym.DO); }
 <YYINITIAL> "nil"        { return tok(sym.NIL); }
 
+<YYINITIAL> {LETTER}*({LETTER}|{DIGIT}*) { return tok(sym.ID, yytext()); }
 <YYINITIAL> "=" { return tok(sym.EQ, null); }
 <YYINITIAL> "+" { return tok(sym.PLUS, null); }
 <YYINITIAL> "-" { return tok(sym.MINUS, null); }
