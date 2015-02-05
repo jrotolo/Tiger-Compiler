@@ -54,6 +54,7 @@ private int commentDepth = 0;
 %%
 <YYINITIAL> " "	{ }
 <YYINITIAL> \n	{ newline(); }
+<YYINITIAL> \t  { }
 <YYINITIAL> ","	{ return tok(sym.COMMA, null); }
 
 <YYINITIAL> "/*" { yybegin(COMMENT); }
