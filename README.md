@@ -29,3 +29,4 @@ The two outputs will be diffed and that output will be displayed to you.
 ### Help
 
 If things go wrong make sure your .profile and .env files are setup correctly.
+Also, make sure your directory structure is setup correctly.
