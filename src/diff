@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+java Parse.Main ../CS4351/tiger/testcases/"$@".tig > ../output1.txt
+cd ../CS4351/tiger/chap2
+java Parse.Main ../testcases/"$@".tig > ../../../output2.txt
+cd ../../../
+diff output1.txt output2.txt
+
+echo "Diff completed. If you don't see anything then the test passed!"
+
+rm output1.txt
+rm output2.txt
+
