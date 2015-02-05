@@ -3,8 +3,8 @@ import ErrorMsg.ErrorMsg;
 
 %% 
 
-DIGIT=	[0-9_]
-LETTER=	[a-zA-z]
+DIGIT=	[0-9]
+LETTER=	[a-zA-Z]
 
 %implements Lexer
 %function nextToken
@@ -87,6 +87,7 @@ private int commentDepth = 0;
 <YYINITIAL> "else"       { return tok(sym.ELSE); }
 <YYINITIAL> "do"         { return tok(sym.DO); }
 <YYINITIAL> "nil"        { return tok(sym.NIL); }
+<YYINITIAL> "of"				 { return tok(sym.OF); }
 
 <YYINITIAL> {LETTER}*({LETTER}|{DIGIT}*) { return tok(sym.ID, yytext()); }
 <YYINITIAL> "=" { return tok(sym.EQ, null); }
@@ -102,5 +103,10 @@ private int commentDepth = 0;
 <YYINITIAL> "&" { return tok(sym.AND, null); }
 <YYINITIAL> "|" { return tok(sym.OR, null); }
 <YYINITIAL> ":=" { return tok(sym.ASSIGN, null); }
+<YYINITIAL> ":" { return tok(sym.COLON, null); }
+<YYINITIAL> "[" { return tok(sym.LBRACK, null); }
+<YYINITIAL> "]" { return tok(sym.RBRACK, null); }
+<YYINITIAL> "{" { return tok(sym.LBRACE, null); }
+<YYINITIAL> "}" { return tok(sym.RBRACE, null); }
 
 . { err("Illegal character: " + yytext()); }

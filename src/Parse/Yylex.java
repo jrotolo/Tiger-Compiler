@@ -73,7 +73,7 @@ private int commentDepth = 0;
 	private final int COMMENT = 1;
 	private final int yy_state_dtrans[] = {
 		0,
-		35
+		41
 	};
 	private void yybegin (int state) {
 		yy_lexical_state = state;
@@ -250,6 +250,12 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
+		YY_NO_ANCHOR,
 		YY_NOT_ACCEPT,
 		YY_NO_ANCHOR,
 		YY_NO_ANCHOR,
@@ -309,28 +315,28 @@ private int [][] unpackFromString(int size1, int size2, String st)
 		0, 14, 14, 14, 14, 14, 14, 14,
 		14, 14, 14, 14, 14, 14, 14, 14,
 		14, 14, 14, 14, 14, 14, 14, 14,
-		14, 14, 14, 14, 14, 14, 14, 15,
-		14, 16, 17, 18, 19, 20, 21, 14,
-		22, 23, 14, 24, 25, 14, 26, 27,
-		28, 14, 29, 30, 31, 32, 33, 34,
-		14, 35, 14, 0, 36, 0, 0, 0
+		14, 14, 14, 15, 0, 16, 0, 0,
+		0, 17, 18, 19, 20, 21, 22, 14,
+		23, 24, 14, 25, 26, 14, 27, 28,
+		29, 14, 30, 31, 32, 33, 34, 35,
+		14, 36, 14, 37, 38, 39, 0, 0
 		
 	};
 	private int yy_rmap[] = {
 		0, 1, 1, 1, 1, 1, 1, 1,
-		1, 2, 3, 1, 4, 1, 1, 1,
-		1, 1, 1, 5, 5, 5, 5, 5,
-		5, 5, 5, 5, 5, 5, 5, 5,
-		5, 5, 5, 6, 1, 1, 1, 7,
-		8, 9, 5, 10, 11, 12, 13, 14,
-		15, 16, 17, 18, 19, 20, 21, 22,
-		23, 24, 25, 26, 27, 28, 29, 30,
-		31, 32, 33, 34, 35, 36, 37, 38,
-		39, 40, 41, 42, 43, 44, 45, 46,
-		47 
+		1, 2, 3, 4, 1, 5, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1,
+		6, 6, 6, 6, 6, 6, 6, 6,
+		6, 6, 6, 6, 6, 6, 6, 6,
+		6, 7, 1, 1, 1, 8, 9, 6,
+		10, 11, 12, 13, 14, 15, 16, 17,
+		18, 19, 20, 21, 22, 23, 24, 25,
+		26, 27, 28, 29, 30, 31, 32, 33,
+		34, 35, 36, 37, 38, 39, 40, 41,
+		42, 43, 44, 45, 46, 47, 48 
 	};
-	private int yy_nxt[][] = unpackFromString(48,37,
-"1,2,3,4,5,6,7,8,9,39,40,10,11,12,42:2,75,76,42,44,59,60,42,45,42,61,62,42:4,46,42,63,77,42,13,-1:41,14,-1:44,16,17,-1:35,18,-1:33,39,-1:4,42:22,-1,36,-1,36:2,41,36:3,43,36:28,-1:9,39,-1:5,39,-1:33,15,-1:32,37,-1:32,38,-1:41,39,-1:4,42:13,19,42:8,-1:10,39,-1:4,42:7,20,42:4,21,42:9,-1:10,39,-1:4,42:8,65,42:4,22,42:7,66,-1:10,39,-1:4,42:5,23,42:16,-1:10,39,-1:4,42:15,24,42:6,-1:10,39,-1:4,42:17,25,42:4,-1:10,39,-1:4,42:11,26,42:10,-1:10,39,-1:4,42:15,27,42:6,-1:10,39,-1:4,42:6,28,42:15,-1:10,39,-1:4,42:12,29,42:9,-1:10,39,-1:4,42:6,30,42:15,-1:10,39,-1:4,42:21,31,-1:10,39,-1:4,42:10,32,42:11,-1:10,39,-1:4,42:6,33,42:15,-1:10,39,-1:4,42:12,34,42:9,-1:10,39,-1:4,42:11,64,47,42:9,-1:10,39,-1:4,42:13,48,42:4,80,42:3,-1:10,39,-1:4,42:6,49,42:15,-1:10,39,-1:4,42:9,50,42:12,-1:10,39,-1:4,42:2,51,42:19,-1:10,39,-1:4,42:16,52,42:5,-1:10,39,-1:4,42:6,53,42:15,-1:10,39,-1:4,42:14,54,42:7,-1:10,39,-1:4,42:2,55,42:19,-1:10,39,-1:4,42:2,56,42:19,-1:10,39,-1:4,42:11,57,42:10,-1:10,39,-1:4,42:13,58,42:8,-1:10,39,-1:4,42:15,67,42:6,-1:10,39,-1:4,42:6,68,42:15,-1:10,39,-1:4,42:9,69,42:12,-1:10,39,-1:4,42:9,70,42:12,-1:10,39,-1:4,42:15,71,42:6,-1:10,39,-1:4,42:15,72,42:6,-1:10,39,-1:4,42:8,73,42:13,-1:10,39,-1:4,42:17,74,42:4,-1:10,39,-1:4,42:4,78,42:17,-1:10,39,-1:4,42:12,79,42:9,-1");
+	private int yy_nxt[][] = unpackFromString(49,40,
+"1,2,3,4,5,6,7,8,9,45,10,11,12,13,47,14,15,81,82,47,49,65,66,47,50,47,67,68,51,47:3,52,47,69,83,47,16,17,18,-1:44,19,-1:47,20,-1:39,21,22,-1:38,23,-1:36,45,-1:4,47,-1:2,47:20,-1:3,42,-1,42:2,46,42:3,48,42:31,-1:9,45,-1:38,43,-1:35,44,-1:44,45,-1:4,47,-1:2,47:11,24,47:8,-1:12,45,-1:4,47,-1:2,47:5,25,47:4,26,47:9,-1:12,45,-1:4,47,-1:2,47:5,27,47:14,-1:12,45,-1:4,47,-1:2,47:6,71,47:4,28,47:7,72,-1:12,45,-1:4,47,-1:2,47:3,29,47:16,-1:12,45,-1:4,47,-1:2,47:13,30,47:6,-1:12,45,-1:4,47,-1:2,47:15,31,47:4,-1:12,45,-1:4,47,-1:2,47:9,32,47:10,-1:12,45,-1:4,47,-1:2,47:13,33,47:6,-1:12,45,-1:4,47,-1:2,47:4,34,47:15,-1:12,45,-1:4,47,-1:2,47:10,35,47:9,-1:12,45,-1:4,47,-1:2,47:4,36,47:15,-1:12,45,-1:4,47,-1:2,47:19,37,-1:12,45,-1:4,47,-1:2,47:8,38,47:11,-1:12,45,-1:4,47,-1:2,47:4,39,47:15,-1:12,45,-1:4,47,-1:2,47:10,40,47:9,-1:12,45,-1:4,47,-1:2,47:9,70,53,47:9,-1:12,45,-1:4,47,-1:2,47:11,54,47:4,86,47:3,-1:12,45,-1:4,47,-1:2,47:4,55,47:15,-1:12,45,-1:4,47,-1:2,47:7,56,47:12,-1:12,45,-1:4,47,-1:2,57,47:19,-1:12,45,-1:4,47,-1:2,47:14,58,47:5,-1:12,45,-1:4,47,-1:2,47:4,59,47:15,-1:12,45,-1:4,47,-1:2,47:12,60,47:7,-1:12,45,-1:4,47,-1:2,61,47:19,-1:12,45,-1:4,47,-1:2,62,47:19,-1:12,45,-1:4,47,-1:2,47:9,63,47:10,-1:12,45,-1:4,47,-1:2,47:11,64,47:8,-1:12,45,-1:4,47,-1:2,47:13,73,47:6,-1:12,45,-1:4,47,-1:2,47:4,74,47:15,-1:12,45,-1:4,47,-1:2,47:7,75,47:12,-1:12,45,-1:4,47,-1:2,47:7,76,47:12,-1:12,45,-1:4,47,-1:2,47:13,77,47:6,-1:12,45,-1:4,47,-1:2,47:13,78,47:6,-1:12,45,-1:4,47,-1:2,47:6,79,47:13,-1:12,45,-1:4,47,-1:2,47:15,80,47:4,-1:12,45,-1:4,47,-1:2,47:2,84,47:17,-1:12,45,-1:4,47,-1:2,47:10,85,47:9,-1:3");
 	public java_cup.runtime.Symbol nextToken ()
 		throws java.io.IOException {
 		char yy_lookahead;
@@ -423,147 +429,147 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -11:
 						break;
 					case 10:
-						{ return tok(sym.LT, null); }
+						{ return tok(sym.COLON, null); }
 					case -12:
 						break;
 					case 11:
-						{ return tok(sym.EQ, null); }
+						{ return tok(sym.LT, null); }
 					case -13:
 						break;
 					case 12:
-						{ return tok(sym.GT, null); }
+						{ return tok(sym.EQ, null); }
 					case -14:
 						break;
 					case 13:
-						{ return tok(sym.OR, null); }
+						{ return tok(sym.GT, null); }
 					case -15:
 						break;
 					case 14:
-						{ yybegin(COMMENT); }
+						{ return tok(sym.LBRACK, null); }
 					case -16:
 						break;
 					case 15:
-						{ return tok(sym.ASSIGN, null); }
+						{ return tok(sym.RBRACK, null); }
 					case -17:
 						break;
 					case 16:
-						{ return tok(sym.LE, null); }
+						{ return tok(sym.LBRACE, null); }
 					case -18:
 						break;
 					case 17:
-						{ return tok(sym.NEQ, null); }
+						{ return tok(sym.OR, null); }
 					case -19:
 						break;
 					case 18:
-						{ return tok(sym.GE, null); }
+						{ return tok(sym.RBRACE, null); }
 					case -20:
 						break;
 					case 19:
-						{ return tok(sym.DO); }
+						{ yybegin(COMMENT); }
 					case -21:
 						break;
 					case 20:
-						{ return tok(sym.IF); }
+						{ return tok(sym.ASSIGN, null); }
 					case -22:
 						break;
 					case 21:
-						{ return tok(sym.IN); }
+						{ return tok(sym.LE, null); }
 					case -23:
 						break;
 					case 22:
-						{ return tok(sym.TO); }
+						{ return tok(sym.NEQ, null); }
 					case -24:
 						break;
 					case 23:
-						{ return tok(sym.END); }
+						{ return tok(sym.GE, null); }
 					case -25:
 						break;
 					case 24:
-						{ return tok(sym.FOR); }
+						{ return tok(sym.DO); }
 					case -26:
 						break;
 					case 25:
-						{ return tok(sym.LET); }
+						{ return tok(sym.IF); }
 					case -27:
 						break;
 					case 26:
-						{ return tok(sym.NIL); }
+						{ return tok(sym.IN); }
 					case -28:
 						break;
 					case 27:
-						{ return tok(sym.VAR); }
+						{ return tok(sym.OF); }
 					case -29:
 						break;
 					case 28:
-						{ return tok(sym.ELSE); }
+						{ return tok(sym.TO); }
 					case -30:
 						break;
 					case 29:
-						{ return tok(sym.THEN); }
+						{ return tok(sym.END); }
 					case -31:
 						break;
 					case 30:
-						{ return tok(sym.TYPE); }
+						{ return tok(sym.FOR); }
 					case -32:
 						break;
 					case 31:
-						{ return tok(sym.ARRAY); }
+						{ return tok(sym.LET); }
 					case -33:
 						break;
 					case 32:
-						{ return tok(sym.BREAK); }
+						{ return tok(sym.NIL); }
 					case -34:
 						break;
 					case 33:
-						{ return tok(sym.WHILE); }
+						{ return tok(sym.VAR); }
 					case -35:
 						break;
 					case 34:
-						{ return tok(sym.FUNCTION); }
+						{ return tok(sym.ELSE); }
 					case -36:
 						break;
-					case 36:
-						{ }
+					case 35:
+						{ return tok(sym.THEN); }
 					case -37:
 						break;
+					case 36:
+						{ return tok(sym.TYPE); }
+					case -38:
+						break;
 					case 37:
+						{ return tok(sym.ARRAY); }
+					case -39:
+						break;
+					case 38:
+						{ return tok(sym.BREAK); }
+					case -40:
+						break;
+					case 39:
+						{ return tok(sym.WHILE); }
+					case -41:
+						break;
+					case 40:
+						{ return tok(sym.FUNCTION); }
+					case -42:
+						break;
+					case 42:
+						{ }
+					case -43:
+						break;
+					case 43:
 						{
 	if (commentDepth <= 0)
 		yybegin(YYINITIAL);
 	else
 		commentDepth--;
 }
-					case -38:
+					case -44:
 						break;
-					case 38:
+					case 44:
 						{
 	commentDepth++;
 	yybegin(COMMENT);
 }
-					case -39:
-						break;
-					case 39:
-						{ return tok(sym.ID, yytext()); }
-					case -40:
-						break;
-					case 40:
-						{ err("Illegal character: " + yytext()); }
-					case -41:
-						break;
-					case 41:
-						{ }
-					case -42:
-						break;
-					case 42:
-						{ return tok(sym.ID, yytext()); }
-					case -43:
-						break;
-					case 43:
-						{ }
-					case -44:
-						break;
-					case 44:
-						{ return tok(sym.ID, yytext()); }
 					case -45:
 						break;
 					case 45:
@@ -571,7 +577,7 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -46:
 						break;
 					case 46:
-						{ return tok(sym.ID, yytext()); }
+						{ }
 					case -47:
 						break;
 					case 47:
@@ -579,7 +585,7 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case -48:
 						break;
 					case 48:
-						{ return tok(sym.ID, yytext()); }
+						{ }
 					case -49:
 						break;
 					case 49:
@@ -709,6 +715,30 @@ private int [][] unpackFromString(int size1, int size2, String st)
 					case 80:
 						{ return tok(sym.ID, yytext()); }
 					case -81:
+						break;
+					case 81:
+						{ return tok(sym.ID, yytext()); }
+					case -82:
+						break;
+					case 82:
+						{ return tok(sym.ID, yytext()); }
+					case -83:
+						break;
+					case 83:
+						{ return tok(sym.ID, yytext()); }
+					case -84:
+						break;
+					case 84:
+						{ return tok(sym.ID, yytext()); }
+					case -85:
+						break;
+					case 85:
+						{ return tok(sym.ID, yytext()); }
+					case -86:
+						break;
+					case 86:
+						{ return tok(sym.ID, yytext()); }
+					case -87:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);
