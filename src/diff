@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 java Parse.Main ../CS4351/tiger/testcases/"$@".tig > ../output1.txt
 cd ../CS4351/tiger/chap2
