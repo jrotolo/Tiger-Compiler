@@ -50,6 +50,23 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 \n	{newline();}
 ","	{return tok(sym.COMMA, null);}
 
+<YYINITIAL> "while"      { return tok(sym.WHILE); }
+<YYINITIAL> "for"        { return tok(sym.FOR); }
+<YYINITIAL> "to"         { return tok(sym.TO); }
+<YYINITIAL> "break"      { return tok(sym.BREAK); }
+<YYINITIAL> "let"        { return tok(sym.LET); }
+<YYINITIAL> "in"         { return tok(sym.IN); }
+<YYINITIAL> "end"        { return tok(sym.END); }
+<YYINITIAL> "function"   { return tok(sym.FUNCTION); }
+<YYINITIAL> "var"        { return tok(sym.VAR); }
+<YYINITIAL> "type"       { return tok(sym.TYPE); }
+<YYINITIAL> "array"      { return tok(sym.ARRAY); }
+<YYINITIAL> "if"         { return tok(sym.IF); }
+<YYINITIAL> "then"       { return tok(sym.THEN); }
+<YYINITIAL> "else"       { return tok(sym.ELSE); }
+<YYINITIAL> "do"         { return tok(sym.DO); }
+<YYINITIAL> "nil"        { return tok(sym.NIL); }
+
 <YYINITIAL> "=" { return tok(sym.EQ, null); }
 <YYINITIAL> "+" { return tok(sym.PLUS, null); }
 <YYINITIAL> "-" { return tok(sym.MINUS, null); }
