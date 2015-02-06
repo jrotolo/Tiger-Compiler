@@ -40,6 +40,7 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 }
 
 private int commentDepth = 0;
+private String stringBuffer;
 
 %}
 
@@ -50,6 +51,8 @@ private int commentDepth = 0;
 %eofval}       
 
 %state COMMENT
+%state STRING
+%state ESCAPEDSTRING
 
 %%
 <YYINITIAL> " "	{ }
@@ -70,7 +73,35 @@ private int commentDepth = 0;
 }
 <COMMENT> . { }
 
+<YYINITIAL> \" { 
+	stringBuffer = "";
+	yybegin(STRING); 
+}
+<STRING> \" {
+	yybegin(YYINITIAL);
+	return tok(sym.STRING, stringBuffer);
+}
+<STRING> \n { err("Error parsing the string: " + stringBuffer + ". Expected '\"'"); }
+<STRING> \\ { yybegin(ESCAPEDSTRING); }
+<STRING> . { stringBuffer += yytext(); }
 
+<ESCAPEDSTRING> n {
+	stringBuffer += "\n";
+	yybegin(STRING);
+}
+<ESCAPEDSTRING> t { 
+	stringBuffer += "\t";
+	yybegin(STRING);
+}
+<ESCAPEDSTRING> \" {
+	stringBuffer += "\"";
+	yybegin(STRING);
+}
+<ESCAPEDSTRING> \\ {
+	stringBuffer += "\\";
+	yybegin(STRING);
+}
+<ESCAPEDSTRING> . { err("Unexpected character '" + yytext() + "' after '\\'."); }
 
 <YYINITIAL> "while"      { return tok(sym.WHILE); }
 <YYINITIAL> "for"        { return tok(sym.FOR); }
@@ -110,5 +141,9 @@ private int commentDepth = 0;
 <YYINITIAL> "]" { return tok(sym.RBRACK, null); }
 <YYINITIAL> "{" { return tok(sym.LBRACE, null); }
 <YYINITIAL> "}" { return tok(sym.RBRACE, null); }
+<YYINITIAL> ";" { return tok(sym.SEMICOLON, null); }
+<YYINITIAL> "." { return tok(sym.DOT, null); }
+<YYINITIAL> "(" { return tok(sym.LPAREN, null); }
+<YYINITIAL> ")" { return tok(sym.RPAREN, null); }
 
 . { err("Illegal character: " + yytext()); }
