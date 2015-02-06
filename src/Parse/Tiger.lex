@@ -135,6 +135,7 @@ private String stringBuffer;
 <YYINITIAL> "&"     { return tok(sym.AND, null); }
 <YYINITIAL> "|"     { return tok(sym.OR, null); }
 <YYINITIAL> ":="    { return tok(sym.ASSIGN, null); }
+<YYINITIAL> "="			{ return tok(sym.EQ, null); }
 
 <YYINITIAL> "."     { return tok(sym.DOT); }
 <YYINITIAL> ","     { return tok(sym.COMMA); }
