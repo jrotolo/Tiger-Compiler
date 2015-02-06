@@ -125,6 +125,7 @@ private String stringBuffer;
 <YYINITIAL> {DIGIT}+ { return tok(sym.INT, new Integer(yytext())); }
 <YYINITIAL> {LETTER}*({LETTER}|{DIGIT}*) { return tok(sym.ID, yytext()); }
 <YYINITIAL> "-"     { return tok(sym.MINUS, null); }
+<YYINITIAL> "+"			{ return tok(sym.PLUS, null); }
 <YYINITIAL> "*"     { return tok(sym.TIMES, null); }
 <YYINITIAL> "/"     { return tok(sym.DIVIDE, null); }
 <YYINITIAL> "<>"    { return tok(sym.NEQ, null); }
