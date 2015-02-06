@@ -40,6 +40,7 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 }
 
 private int commentDepth = 0;
+private String string;
 
 %}
 
@@ -50,6 +51,7 @@ private int commentDepth = 0;
 %eofval}       
 
 %state COMMENT
+%state STRING
 
 %%
 <YYINITIAL> " "	{ }
@@ -70,7 +72,14 @@ private int commentDepth = 0;
 }
 <COMMENT> . { }
 
-
+<YYINITIAL> \" { 
+	string = "";
+	yybegin(STRING); 
+}
+<STRING> \" {
+	yybegin(YYINITIAL);
+	return tok(sym.STRING, string);
+}
 
 <YYINITIAL> "while"      { return tok(sym.WHILE); }
 <YYINITIAL> "for"        { return tok(sym.FOR); }
