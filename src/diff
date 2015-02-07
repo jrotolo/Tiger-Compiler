@@ -1,13 +1,31 @@
 #!/bin/bash
 
-java Parse.Main ../CS4351/tiger/testcases/"$@".tig > ../output1.txt
-cd ../CS4351/tiger/chap2
-java Parse.Main ../testcases/"$@".tig > ../../../output2.txt
-cd ../../../
-diff output1.txt output2.txt
+if [ "$@" = "all" ]; then
+	for i in `seq 1 18`; do
+		echo "Starting test$i...."
+		echo "----------------------------------"
+		java Parse.Main ../CS4351/tiger/testcases/test"$i".tig > ../output1.txt
+		cd ../CS4351/tiger/chap2
+		java Parse.Main ../testcases/test"$i".tig > ../../../output2.txt
+		cd ../../../
+		diff output1.txt output2.txt
+		rm output1.txt
+		rm output2.txt
+		cd src/
+		echo "Diff completed. If you don't see anything then the test passed!"
+		echo "----------------------------------"
+		echo ""
+	done
+else	
+	java Parse.Main ../CS4351/tiger/testcases/"$@".tig > ../output1.txt
+	cd ../CS4351/tiger/chap2
+	java Parse.Main ../testcases/"$@".tig > ../../../output2.txt
+	cd ../../../
+	diff output1.txt output2.txt
+	rm output1.txt
+	rm output2.txt
+	echo "Diff completed. If you don't see anything then the test passed!"
+fi
 
-echo "Diff completed. If you don't see anything then the test passed!"
 
-rm output1.txt
-rm output2.txt
 

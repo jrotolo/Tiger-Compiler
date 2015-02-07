@@ -110,19 +110,19 @@ private String stringBuffer;
 <YYINITIAL> "let"        { return tok(sym.LET); }
 <YYINITIAL> "in"         { return tok(sym.IN); }
 <YYINITIAL> "end"        { return tok(sym.END); }
-<YYINITIAL> "function"   { return tok(sym.FUNCTION); }
+<YYINITIAL> "function"   {  return tok(sym.FUNCTION); }
 <YYINITIAL> "var"        { return tok(sym.VAR); }
 <YYINITIAL> "type"       { return tok(sym.TYPE); }
 <YYINITIAL> "array"      { return tok(sym.ARRAY); }
 <YYINITIAL> "if"         { return tok(sym.IF); }
 <YYINITIAL> "then"       { return tok(sym.THEN); }
 <YYINITIAL> "else"       { return tok(sym.ELSE); }
-<YYINITIAL> "do"         { return tok(sym.DO); }
 <YYINITIAL> "nil"        { return tok(sym.NIL); }
 <YYINITIAL> "of"				 { return tok(sym.OF); }
+<YYINITIAL> "do"         { return tok(sym.DO); }
 
 <YYINITIAL> {DIGIT}+ { return tok(sym.INT, new Integer(yytext())); }
-<YYINITIAL> {LETTER}*({LETTER}|{DIGIT}*) { return tok(sym.ID, yytext()); }
+<YYINITIAL> {LETTER}*(_|{LETTER}|{DIGIT})* { return tok(sym.ID, yytext()); }
 <YYINITIAL> "=" { return tok(sym.EQ, null); }
 <YYINITIAL> "+" { return tok(sym.PLUS, null); }
 <YYINITIAL> "-" { return tok(sym.MINUS, null); }
