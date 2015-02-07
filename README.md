@@ -24,7 +24,12 @@ For example:
 ./diff test1
 ```
 This will run test1.tig first using your lexer and then with the provided lexer.
-The two outputs will be diffed and that output will be displayed to you.
+The two outputs will be diffed and that output will be displayed to you.  
+
+To recursively run all the test at once run:
+```bash
+./diff all
+```
 
 ### Help
 
