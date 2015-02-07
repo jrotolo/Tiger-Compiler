@@ -138,15 +138,15 @@ private String stringBuffer;
 <YYINITIAL> ":="    { return tok(sym.ASSIGN, null); }
 <YYINITIAL> "="			{ return tok(sym.EQ, null); }
 
-<YYINITIAL> "."     { return tok(sym.DOT); }
-<YYINITIAL> ","     { return tok(sym.COMMA); }
-<YYINITIAL> ":"     { return tok(sym.COLON); }
-<YYINITIAL> ";"     { return tok(sym.SEMICOLON); }
-<YYINITIAL> "{"     { return tok(sym.LBRACE); }
-<YYINITIAL> "}"     { return tok(sym.RBRACE); }
-<YYINITIAL> "["     { return tok(sym.LBRACK); }
-<YYINITIAL> "]"     { return tok(sym.RBRACK); }
-<YYINITIAL> "("     { return tok(sym.LPAREN); }
-<YYINITIAL> ")"     { return tok(sym.RPAREN); }
+<YYINITIAL> "."     { return tok(sym.DOT, null); }
+<YYINITIAL> ","     { return tok(sym.COMMA, null); }
+<YYINITIAL> ":"     { return tok(sym.COLON, null); }
+<YYINITIAL> ";"     { return tok(sym.SEMICOLON, null); }
+<YYINITIAL> "{"     { return tok(sym.LBRACE, null); }
+<YYINITIAL> "}"     { return tok(sym.RBRACE, null); }
+<YYINITIAL> "["     { return tok(sym.LBRACK, null); }
+<YYINITIAL> "]"     { return tok(sym.RBRACK, null); }
+<YYINITIAL> "("     { return tok(sym.LPAREN, null); }
+<YYINITIAL> ")"     { return tok(sym.RPAREN, null); }
 
 . { err("Illegal character: " + yytext()); }
