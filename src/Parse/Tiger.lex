@@ -110,7 +110,7 @@ private String stringBuffer;
 <YYINITIAL> "let"        { return tok(sym.LET); }
 <YYINITIAL> "in"         { return tok(sym.IN); }
 <YYINITIAL> "end"        { return tok(sym.END); }
-<YYINITIAL> "function"   {  return tok(sym.FUNCTION); }
+<YYINITIAL> "function"   { return tok(sym.FUNCTION); }
 <YYINITIAL> "var"        { return tok(sym.VAR); }
 <YYINITIAL> "type"       { return tok(sym.TYPE); }
 <YYINITIAL> "array"      { return tok(sym.ARRAY); }
