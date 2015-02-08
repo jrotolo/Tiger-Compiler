@@ -45,6 +45,7 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 
 private int commentDepth = 0;
 private String stringBuffer;
+private String digitBuffer = "";
 
 %}
 
@@ -97,8 +98,26 @@ private String stringBuffer;
 	stringBuffer += "\t";
 	yybegin(STRING);
 }
+<ESCAPEDSTRING> "0" {
+	digitBuffer += yytext();
+	if (digitBuffer.length() == 3) {
+		stringBuffer += asciiLookup(new Integer(digitBuffer));
+		yybegin(STRING);
+	}
+	yybegin(ESCAPEDSTRING);
+}
+<ESCAPEDSTRING> {DIGIT} {
+	digitBuffer += yytext();
+	if (digitBuffer.length() == 3) {
+		stringBuffer += asciiLookup(new Integer(digitBuffer));
+		yybegin(STRING);
+	} else {
+		yybegin(ESCAPEDSTRING);
+	}
+}
 <ESCAPEDSTRING> {DIGIT}*3 { 
-	stringBuffer += asciiLookup(new Integer(yytext()));
+	digitBuffer += yytext();
+	stringBuffer += asciiLookup(new Integer(digitBuffer));
 	yybegin(STRING);	
 }
 <ESCAPEDSTRING> \" {
