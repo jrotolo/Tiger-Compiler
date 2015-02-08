@@ -98,13 +98,18 @@ private String digitBuffer = "";
 	stringBuffer += "\t";
 	yybegin(STRING);
 }
+<ESCAPEDSTRING> {DIGIT}*2 {
+	err("Wrong number of digits must be /ddd got " + yytext());
+	yybegin(STRING);
+}
 <ESCAPEDSTRING> "0" {
 	digitBuffer += yytext();
 	if (digitBuffer.length() == 3) {
 		stringBuffer += asciiLookup(new Integer(digitBuffer));
 		yybegin(STRING);
+	} else {
+		yybegin(ESCAPEDSTRING);
 	}
-	yybegin(ESCAPEDSTRING);
 }
 <ESCAPEDSTRING> {DIGIT} {
 	digitBuffer += yytext();
