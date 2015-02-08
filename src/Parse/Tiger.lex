@@ -36,6 +36,10 @@ private java_cup.runtime.Symbol tok(int kind, Object value) {
     return new java_cup.runtime.Symbol(kind, yychar, yychar+yylength(), value);
 }
 
+private java_cup.runtime.Symbol tok(int kind, int initChar, int endChar, Object value) {
+	return new java_cup.runtime.Symbol(kind, initChar, endChar, value);
+}	
+
 private ErrorMsg errorMsg;
 
 Yylex(java.io.InputStream s, ErrorMsg e) {
@@ -46,6 +50,7 @@ Yylex(java.io.InputStream s, ErrorMsg e) {
 private int commentDepth = 0;
 private String stringBuffer;
 private String digitBuffer = "";
+private int initChar;
 
 %}
 
@@ -80,11 +85,12 @@ private String digitBuffer = "";
 
 <YYINITIAL> \" { 
 	stringBuffer = "";
+	initChar = yychar;
 	yybegin(STRING); 
 }
 <STRING> \" {
 	yybegin(YYINITIAL);
-	return tok(sym.STRING, stringBuffer);
+	return tok(sym.STRING, initChar, initChar+yylength(), stringBuffer);
 }
 <STRING> \n { err("Error parsing the string: " + stringBuffer + ". Expected '\"'"); }
 <STRING> \\ { yybegin(ESCAPEDSTRING); }
