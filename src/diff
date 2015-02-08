@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$@" = "all" ]; then
-	for i in `seq 1 18`; do
+	for i in `seq 1 49`; do
 		echo "Starting test$i...."
 		echo "----------------------------------"
 		java Parse.Main ../CS4351/tiger/testcases/test"$i".tig > ../output1.txt

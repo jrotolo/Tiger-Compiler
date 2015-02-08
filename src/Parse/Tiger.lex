@@ -16,6 +16,10 @@ private void newline() {
   errorMsg.newline(yychar);
 }
 
+private String asciiLookup(int value) {
+	return Character.toString((char) value);
+}
+
 private void err(int pos, String s) {
   errorMsg.error(pos,s);
 }
@@ -92,6 +96,10 @@ private String stringBuffer;
 <ESCAPEDSTRING> t { 
 	stringBuffer += "\t";
 	yybegin(STRING);
+}
+<ESCAPEDSTRING> {DIGIT}*3 { 
+	stringBuffer += asciiLookup(new Integer(yytext()));
+	yybegin(STRING);	
 }
 <ESCAPEDSTRING> \" {
 	stringBuffer += "\"";
