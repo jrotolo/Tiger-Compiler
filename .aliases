@@ -1,0 +1,4 @@
+source alias prog1="cd $PROG1 && source .profile"
+source alias prog2="cd $PROG2 && source .profile"
+
+
