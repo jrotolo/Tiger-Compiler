@@ -31,7 +31,7 @@ cd src
 make
 ```
 This will build the Java CUP parser that should then be tested.  
-_Note:_** _Using `make clean` will remove old lexer and parser class files._
+**_Note:_** _Using `make clean` will remove old lexer and parser class files._
 
 ### Testing
 
