@@ -8,11 +8,15 @@ Create a .env file and add your LSU login ID and LSU serve name.
 This setup script will download the needed JLex and JavaCup class files.
 ```bash
 ./setup
+source .env
+cd prog<#>/src
+source .profile
 ```
 Your working directory should be ready to build the project.
 
 ### Testing
 
+##### Prog1
 To test your lexer against the one provided from class:
 ```bash
 cd src
@@ -30,8 +34,11 @@ To recursively run all the test at once run:
 ```bash
 ./diff all
 ```
+##### Prog2
+
+More to come...
 
 ### Help
 
-If things go wrong make sure your .profile and .env files are setup correctly.
+If things go wrong make sure your .profile and .env files are setup correctly and have been sourced.
 Also, make sure your directory structure is setup correctly.
