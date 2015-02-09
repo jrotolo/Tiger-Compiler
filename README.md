@@ -9,10 +9,29 @@ This setup script will download the needed JLex and JavaCup class files.
 ```bash
 ./setup
 source .env
-cd prog<#>/src
-source .profile
+source .aliases
+prog<1-2> 
 ```
 Your working directory should be ready to build the project.
+
+### Running
+
+To run the lexer by itself:
+```bash
+prog1
+cd src
+make
+```
+This will build the JLex lexer that can then be tested.
+
+To run the parser:
+```bash
+prog2
+cd src
+make
+```
+This will build the Java CUP parser that should then be tested.  
+_Note:_** _Using `make clean` will remove old lexer and parser class files._
 
 ### Testing
 
