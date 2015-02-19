@@ -5,7 +5,7 @@ action code {: static Symbol.Symbol sym(String s) {
 	        }
 	    :};
 
-parser code  {: 
+parser code  {:
   Lexer lexer;
 
   public void syntax_error(java_cup.runtime.Symbol current) {
@@ -29,14 +29,20 @@ scan with {: return lexer.nextToken(); :};
 
 terminal String ID, STRING;
 terminal Integer INT;
-terminal COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK, 
-	LBRACE, RBRACE, DOT, PLUS, MINUS, TIMES, DIVIDE, EQ, NEQ, LT, LE, 
+terminal COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK,
+	LBRACE, RBRACE, DOT, PLUS, MINUS, TIMES, DIVIDE, EQ, NEQ, LT, LE,
 	GT, GE, AND, OR, ASSIGN, ARRAY, IF, THEN, ELSE, WHILE, FOR, TO,
 	DO, LET, IN, END, OF, BREAK, NIL, FUNCTION, VAR, TYPE;
 
 non terminal Absyn.Exp          Exp;
 non terminal Absyn.Var          Var;
-non terminal Absyn.Dec 			Dec;
+non terminal Absyn.Dec 					Dec;
+non terminal Absyn.VarDec				VarDec;
+non terminal Absyn.FunctionDec  FunctionDec;
+non terminal Absyn.TypeDec			TypeDec;
+non terminal Absyn.FieldVar			FieldVar;
+non terminal Absyn.SubscriptVar	SubscriptVar;
+
 
 start with Exp;
 
@@ -48,13 +54,28 @@ Exp ::= error:e
 
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
+	|	FieldVar:fv
+		{: RESULT = fv; :}
+	|	SubscriptVar:sv
+		{: RESULT = sv; :}
 	;
 
-Dec ::=   
-    VarDec:v 
+FieldVar ::= Var:v DOT:d ID:n
+		{: RESULT = new Absyn.FieldVar(dleft, v, sym(n)); :}
+		;
+
+SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
+		{: RESULT = new Absyn.SubscriptVar(lleft, new Absyn.SimpleVar(nleft, sym(n)), e); :}
+	|	FieldVar:fv LBRACK:l Exp:e RBRACK:r
+		{: RESULT = new Absyn.SubscriptVar(lleft, fv, e); :}
+	|	SubscriptVar:sv LBRACK:l Exp:e RBRACK:r
+		{: RESULT = new Absyn.SubscriptVar(lleft, sv, e); :}
+	;
+
+Dec ::= VarDec:v
     {: RESULT = v; :}
-    | FunctionDec:func
+|		FunctionDec:func
     {: RESULT = func; :}
-    TypeDec:t
+| 	TypeDec:t
     {: RESULT = t; :}
 ;
