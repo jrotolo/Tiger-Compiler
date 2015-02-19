@@ -36,6 +36,7 @@ terminal COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK,
 
 non terminal Absyn.Exp          Exp;
 non terminal Absyn.Var          Var;
+non terminal Absyn.Dec 			Dec;
 
 start with Exp;
 
@@ -48,3 +49,12 @@ Exp ::= error:e
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
 	;
+
+Dec ::=   
+    VarDec:v 
+    {: RESULT = v; :}
+    | FunctionDec:func
+    {: RESULT = func; :}
+    TypeDec:t
+    {: RESULT = t; :}
+;
