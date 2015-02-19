@@ -5,7 +5,7 @@ action code {: static Symbol.Symbol sym(String s) {
 	        }
 	    :};
 
-parser code  {: 
+parser code  {:
   Lexer lexer;
 
   public void syntax_error(java_cup.runtime.Symbol current) {
@@ -29,13 +29,23 @@ scan with {: return lexer.nextToken(); :};
 
 terminal String ID, STRING;
 terminal Integer INT;
-terminal COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK, 
-	LBRACE, RBRACE, DOT, PLUS, MINUS, TIMES, DIVIDE, EQ, NEQ, LT, LE, 
+terminal COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK,
+	LBRACE, RBRACE, DOT, PLUS, MINUS, TIMES, DIVIDE, EQ, NEQ, LT, LE,
 	GT, GE, AND, OR, ASSIGN, ARRAY, IF, THEN, ELSE, WHILE, FOR, TO,
 	DO, LET, IN, END, OF, BREAK, NIL, FUNCTION, VAR, TYPE;
 
 non terminal Absyn.Exp          Exp;
+non terminal Absyn.ArrayExp			ArrayExp;
+non terminal Absyn.AssignExp		AssignExp;
 non terminal Absyn.Var          Var;
+non terminal Absyn.VarDec				VarDec;
+non terminal Absyn.Dec					Dec;
+non terminal Absyn.DecList			DecList;
+non terminal Absyn.TypeDec			TypeDec;
+non terminal Absyn.TypeDec			NextTypeDec;
+non terminal Absyn.FunctionDec	FunctionDec;
+non terminal Absyn.NameTy				NameTy;
+non terminal Absyn.Ty 					Ty;
 
 start with Exp;
 
@@ -43,6 +53,50 @@ Exp ::= error:e
 	  {: RESULT = new Absyn.SeqExp(eleft, null); :}
 	| Var:v
 	  {: RESULT = new Absyn.VarExp(vleft, v); :}
+	| STRING:s
+		{: RESULT = new Absyn.StringExp(sleft, s); :}
+	| INT:i
+		{: RESULT = new Absyn.IntExp(ileft, i); :}
+	| NIL:n
+		{: RESULT = new Absyn.NilExp(nleft); :}
+	| BREAK:b
+		{: RESULT = new Absyn.BreakExp(bleft); :}
+	| ArrayExp:arr
+		{: RESULT = arr; :}
+	| AssignExp:a
+		{: RESULT = a; :}
+	;
+
+ArrayExp ::= ID:n LBRACK Exp:e1 RBRACK OF Exp:e2
+		{: RESULT = new Absyn.ArrayExp(nleft, sym(n), e1, e2); :}
+	;
+
+AssignExp ::= Var:v ASSIGN Exp:e
+		{: RESULT = new Absyn.AssignExp(vleft, v, e); :}
+	;
+
+DecList ::= Dec:d
+		{: RESULT = new Absyn.DecList(d, null); :}
+	| Dec:d DecList:l
+		{: RESULT = new Absyn.DecList(d, l); :}
+	;
+
+Dec ::= TypeDec:t
+		{: RESULT = t; :}
+	| VarDec:v
+		{: RESULT = v; :}
+	| FunctionDec:f
+		{: RESULT = f; :}
+	;
+
+VarDec ::= Var:v ID:n ASSIGN Exp:e
+		{: RESULT = new Absyn.VarDec(vleft, sym(n), null, e); :}
+	|	Var:v ID:n NameTy:t ASSIGN Exp:e
+		{: RESULT = new Absyn.VarDec(vleft, sym(n), t, e); :}
+	;
+
+TypeDec ::= TYPE:t ID:n EQ Ty:v NextTypeDec:next
+		{: RESULT = new Absyn.TypeDec(tleft, sym(n), v, next); :}
 	;
 
 Var ::=   ID:n
