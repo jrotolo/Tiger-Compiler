@@ -121,6 +121,12 @@ FieldList ::=
 		{: RESULT = new Absyn.FieldList(i1left, sym(i1), sym(i2), f); :}
 	;
 
+NextFieldList ::=
+		{: RESULT = null; :}
+	| COMMA:c ID:n1 COLON ID:n2 NextFieldList:next
+		{: RESULT = new Absyn.FieldList(cleft, sym(n1), sym(n2), next); :}
+	;
+
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
 	;
