@@ -46,6 +46,7 @@ non terminal Absyn.TypeDec			NextTypeDec;
 non terminal Absyn.FunctionDec	FunctionDec;
 non terminal Absyn.NameTy				NameTy;
 non terminal Absyn.Ty 					Ty;
+non terminal Absyn.FieldList		FieldList;
 
 start with Exp;
 
@@ -97,6 +98,20 @@ VarDec ::= Var:v ID:n ASSIGN Exp:e
 
 TypeDec ::= TYPE:t ID:n EQ Ty:v NextTypeDec:next
 		{: RESULT = new Absyn.TypeDec(tleft, sym(n), v, next); :}
+	;
+
+NextTypeDec ::=
+		{: RESULT = null; :}
+	| TypeDec:t
+		{: RESULT = t; :}
+	;
+
+Ty ::= ID:n
+		{: RESULT = new Absyn.NameTy(nleft, sym(n)); :}
+	| LBRACE FieldList:f RBRACE
+		{: RESULT = new Absyn.RecordTy(fleft, f); :}
+	| ARRAY:a OF ID:n
+		{: RESULT = new Absyn.ArrayTy(aleft, sym(n)); :}
 	;
 
 Var ::=   ID:n
