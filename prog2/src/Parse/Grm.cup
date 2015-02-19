@@ -47,6 +47,7 @@ non terminal Absyn.FunctionDec	FunctionDec;
 non terminal Absyn.NameTy				NameTy;
 non terminal Absyn.Ty 					Ty;
 non terminal Absyn.FieldList		FieldList;
+non terminal Absyn.FieldList 		NextFieldList;
 
 start with Exp;
 
@@ -112,6 +113,12 @@ Ty ::= ID:n
 		{: RESULT = new Absyn.RecordTy(fleft, f); :}
 	| ARRAY:a OF ID:n
 		{: RESULT = new Absyn.ArrayTy(aleft, sym(n)); :}
+	;
+
+FieldList ::=
+		{: RESULT = null; :}
+	| ID:i1 COLON ID:i2 NextFieldList:f
+		{: RESULT = new Absyn.FieldList(i1left, sym(i1), sym(i2), f); :}
 	;
 
 Var ::=   ID:n
