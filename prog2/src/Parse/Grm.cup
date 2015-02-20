@@ -55,6 +55,8 @@ non terminal Absyn.FieldList 		NextFieldList;
 
 start with Exp;
 
+/* EXPRESSIONS */
+
 Exp ::= error:e
 	  {: RESULT = new Absyn.SeqExp(eleft, null); :}
 	| Var:v
@@ -118,6 +120,8 @@ OpExp ::= Exp:e1 PLUS Exp:e2
 				Absyn.OpExp.MINUS, e); :}
 	;
 
+/* DECLARATIONS */
+
 DecList ::= Dec:d
 		{: RESULT = new Absyn.DecList(d, null); :}
 	| Dec:d DecList:l
@@ -160,6 +164,8 @@ NextTypeDec ::=
 		{: RESULT = t; :}
 	;
 
+/* TYPES and FIELDS */
+
 Ty ::= ID:n
 		{: RESULT = new Absyn.NameTy(nleft, sym(n)); :}
 	| LBRACE FieldList:f RBRACE
@@ -180,6 +186,7 @@ NextFieldList ::=
 		{: RESULT = new Absyn.FieldList(cleft, sym(n1), sym(n2), next); :}
 	;
 
+/* VARIABLES */
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
 	;
