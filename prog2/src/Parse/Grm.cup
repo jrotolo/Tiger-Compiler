@@ -73,6 +73,10 @@ Exp ::= error:e
 		{: RESULT = arr; :}
 	| AssignExp:a
 		{: RESULT = a; :}
+	| SeqExp:s
+		{: RESULT = s; :}
+	| OpExp:o 
+		{: RESULT = o; :}
 	;
 
 ExpList ::= 
