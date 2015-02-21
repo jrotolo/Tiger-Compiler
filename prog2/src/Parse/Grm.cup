@@ -56,6 +56,9 @@ non terminal Absyn.FieldList 		NextFieldList;
 non terminal Absyn.FieldVar			FieldVar;
 non terminal Absyn.SubscriptVar	SubscriptVar;
 
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+precedence nonassoc EQ, NEQ, LT, LE, GT, GE;
 
 start with Exp;
 
@@ -101,10 +104,10 @@ SeqExp ::= LPAREN:n Exp:e SEMICOLON ExpList:l RPAREN
 		{: RESULT = new Absyn.SeqExp(nleft, l); :}
 	;
 
-	/*
+
 OpExp ::= Exp:e1 PLUS Exp:e2
 		{: RESULT = new Absyn.OpExp(e1left, e1, Absyn.OpExp.PLUS, e2); :}
-/*	| Exp:e1 MINUS Exp:e2
+	| Exp:e1 MINUS Exp:e2
 		{: RESULT = new Absyn.OpExp(e1left, e1, Absyn.OpExp.MINUS, e2); :}
 	| Exp:e1 TIMES Exp:e2
 		{: RESULT = new Absyn.OpExp(e1left, e1, Absyn.OpExp.MUL, e2); :}
@@ -123,8 +126,8 @@ OpExp ::= Exp:e1 PLUS Exp:e2
 	| Exp:e1 NEQ Exp:e2
 		{: RESULT = new Absyn.OpExp(e1left, e1, Absyn.OpExp.NE, e2); :}
 	| MINUS:m Exp:e
-		{: RESULT = new Absyn.OpExp(mleft, new Absyn.IntExp(mleft, 0),
-				Absyn.OpExp.MINUS, e); :} */
+		{: RESULT = new Absyn.OpExp(mleft, new Absyn.IntExp(mleft, 0), Absyn.OpExp.MINUS, e); :}
+	;
 
 /* DECLARATIONS */
 
