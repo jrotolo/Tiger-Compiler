@@ -53,7 +53,6 @@ non terminal Absyn.NameTy				NameTy;
 non terminal Absyn.Ty 					Ty;
 non terminal Absyn.FieldList		FieldList;
 non terminal Absyn.FieldList 		NextFieldList;
-non terminal Absyn.TypeDec			TypeDec;
 non terminal Absyn.FieldVar			FieldVar;
 non terminal Absyn.SubscriptVar	SubscriptVar;
 
