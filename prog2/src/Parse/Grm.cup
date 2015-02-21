@@ -44,6 +44,9 @@ non terminal Absyn.OpExp				OpExp;
 non terminal Absyn.SeqExp				SeqExp;
 non terminal Absyn.IfExp				IfExp;
 non terminal Absyn.Exp 					ElseExp;
+non terminal Absyn.CallExp			CallExp;
+non terminal Absyn.ExpList			FunctionArgumentList;
+non terminal Absyn.ExpList			NextFunctionArgumentList;
 non terminal Absyn.Var          Var;
 
 non terminal Absyn.VarDec				VarDec;
@@ -118,7 +121,6 @@ SeqExp ::= LPAREN:n Exp:e SEMICOLON ExpList:l RPAREN
 		{: RESULT = new Absyn.SeqExp(nleft, l); :}
 	;
 
-
 OpExp ::= Exp:e1 PLUS Exp:e2
 		{: RESULT = new Absyn.OpExp(e1left, e1, Absyn.OpExp.PLUS, e2); :}
 	| Exp:e1 MINUS Exp:e2
@@ -151,6 +153,22 @@ ElseExp ::=
 		{: RESULT = null; :}
 	| ELSE Exp:e1
 		{: RESULT = e1; :}
+	;
+
+CallExp ::= ID:n LPAREN FunctionArgumentList:l RPAREN
+		{: RESULT = new Absyn.CallExp(nleft, sym(n), l); :}
+	;
+
+FunctionArgumentList ::=
+		{: RESULT = null; :}
+	| Exp:e NextFunctionArgumentList:l
+		{: RESULT = new Absyn.ExpList(e, l); :}
+	;
+
+NextFunctionArgumentList ::=
+		{: RESULT = null; :}
+	| COMMA:c Exp:e NextFunctionArgumentList:l
+		{: RESULT = new Absyn.ExpList(e, l); :}
 	;
 
 /* DECLARATIONS */
