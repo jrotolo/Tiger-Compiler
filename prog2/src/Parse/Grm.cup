@@ -77,8 +77,8 @@ SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
 /* Declarations */
 Dec ::= VarDec:v
     {: RESULT = v; :}
-|		FunctionDec:func
+	|		FunctionDec:func
     {: RESULT = func; :}
-| 	TypeDec:t
+	| 	TypeDec:t
     {: RESULT = t; :}
 ;
