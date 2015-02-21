@@ -41,6 +41,7 @@ non terminal Absyn.AssignExp		AssignExp;
 non terminal Absyn.OpExp				OpExp;
 non terminal Absyn.SeqExp				SeqExp;
 non terminal Absyn.Var          Var;
+
 non terminal Absyn.VarDec				VarDec;
 non terminal Absyn.Dec					Dec;
 non terminal Absyn.DecList			DecList;
@@ -52,6 +53,10 @@ non terminal Absyn.NameTy				NameTy;
 non terminal Absyn.Ty 					Ty;
 non terminal Absyn.FieldList		FieldList;
 non terminal Absyn.FieldList 		NextFieldList;
+non terminal Absyn.TypeDec			TypeDec;
+non terminal Absyn.FieldVar			FieldVar;
+non terminal Absyn.SubscriptVar	SubscriptVar;
+
 
 start with Exp;
 
@@ -77,7 +82,7 @@ Exp ::= error:e
 		{: RESULT = s; :}
 	;
 
-ExpList ::= 
+ExpList ::=
 		{: RESULT = null; :}
 	| Exp:e
 		{: RESULT = new Absyn.ExpList(e, null); :}
@@ -188,7 +193,35 @@ NextFieldList ::=
 		{: RESULT = new Absyn.FieldList(cleft, sym(n1), sym(n2), next); :}
 	;
 
+
 /* VARIABLES */
+
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
+	|	FieldVar:fv
+		{: RESULT = fv; :}
+	|	SubscriptVar:sv
+		{: RESULT = sv; :}
 	;
+
+FieldVar ::= Var:v DOT:d ID:n
+		{: RESULT = new Absyn.FieldVar(dleft, v, sym(n)); :}
+		;
+
+SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
+		{: RESULT = new Absyn.SubscriptVar(lleft, new Absyn.SimpleVar(nleft, sym(n)), e); :}
+	|	FieldVar:fv LBRACK:l Exp:e RBRACK:r
+		{: RESULT = new Absyn.SubscriptVar(lleft, fv, e); :}
+	|	SubscriptVar:sv LBRACK:l Exp:e RBRACK:r
+		{: RESULT = new Absyn.SubscriptVar(lleft, sv, e); :}
+	;
+
+
+/* Declarations */
+Dec ::= VarDec:v
+    {: RESULT = v; :}
+	|		FunctionDec:func
+    {: RESULT = func; :}
+	| 	TypeDec:t
+    {: RESULT = t; :}
+;
