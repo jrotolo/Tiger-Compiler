@@ -36,6 +36,8 @@ terminal COMMA, COLON, SEMICOLON, LPAREN, RPAREN, LBRACK, RBRACK,
 
 non terminal Absyn.Exp          Exp;
 non terminal Absyn.ExpList			ExpList;
+non terminal Absyn.ExpList			Sequence;
+non terminal Absyn.ExpList			NextSequence;
 non terminal Absyn.ArrayExp			ArrayExp;
 non terminal Absyn.AssignExp		AssignExp;
 non terminal Absyn.OpExp				OpExp;
@@ -90,8 +92,18 @@ ExpList ::=
 		{: RESULT = null; :}
 	| Exp:e
 		{: RESULT = new Absyn.ExpList(e, null); :}
-	| Exp:e ExpList:l
-		{: RESULT = new Absyn.ExpList(e, l); :}
+	| Sequence:s
+		{: RESULT = s; :}
+	;
+
+Sequence ::= Exp:e SEMICOLON NextSequence:next
+		{: RESULT = new Absyn.ExpList(e, next); :}
+	;
+
+NextSequence ::= Exp:e
+		{: RESULT = new Absyn.ExpList(e, null); :}
+	| Sequence:s
+		{: RESULT = s; :}
 	;
 
 ArrayExp ::= ID:n LBRACK Exp:e1 RBRACK OF Exp:e2
