@@ -65,6 +65,9 @@ non terminal Absyn.FieldExpList	FieldExpList;
 non terminal Absyn.FieldExpList	NextFieldExpList;
 non terminal Absyn.FieldVar			FieldVar;
 non terminal Absyn.SubscriptVar	SubscriptVar;
+non terminal Absyn.ForExp				ForExp;
+non terminal Absyn.WhileExp			WhileExp;
+non terminal Absyn.LetExp				LetExp;
 
 precedence nonassoc THEN;
 precedence nonassoc ELSE;
@@ -91,12 +94,18 @@ Exp ::= error:e
 		{: RESULT = new Absyn.NilExp(nleft); :}
 	| BREAK:b
 		{: RESULT = new Absyn.BreakExp(bleft); :}
+	| LetExp:l
+		{: RESULT = l; :}
 	| ArrayExp:arr
 		{: RESULT = arr; :}
 	| AssignExp:a
 		{: RESULT = a; :}
 	| SeqExp:s
 		{: RESULT = s; :}
+	| ForExp:fo
+		{: RESULT = fo; :}
+	| WhileExp:w
+		{: RESULT = w; :}
 	;
 
 ExpList ::=
@@ -127,6 +136,19 @@ AssignExp ::= Var:v ASSIGN Exp:e
 
 SeqExp ::= LPAREN:n Exp:e SEMICOLON ExpList:l RPAREN
 		{: RESULT = new Absyn.SeqExp(nleft, l); :}
+	;
+
+
+ForExp ::= ID:n FOR:fo ASSIGN Exp:e1 TO Exp:e2 DO Exp:e3
+		{: RESULT = new Absyn.ForExp(foleft, new Absyn.VarDec(nleft, sym(n), null, e1), e2, e3); :}
+	;
+
+WhileExp ::= WHILE:w Exp:e1 DO Exp:e2
+		{: RESULT = new Absyn.WhileExp(wleft, e1, e2); :}
+	;
+
+LetExp ::= LET:l DecList:d IN ExpList:e END
+		{: RESULT = new Absyn.LetExp(lleft, d, new Absyn.SeqExp(eleft, e)); :}
 	;
 
 OpExp ::= Exp:e1 PLUS Exp:e2
@@ -273,7 +295,7 @@ SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
 	;
 
 
-/* Declarations */
+/* DECLARATIONS */
 Dec ::= VarDec:v
     {: RESULT = v; :}
 	|		FunctionDec:func
