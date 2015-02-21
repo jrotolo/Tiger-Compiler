@@ -52,6 +52,7 @@ Exp ::= error:e
 	  {: RESULT = new Absyn.VarExp(vleft, v); :}
 	;
 
+/* Variables */
 Var ::=   ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
 	|	FieldVar:fv
@@ -72,6 +73,8 @@ SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
 		{: RESULT = new Absyn.SubscriptVar(lleft, sv, e); :}
 	;
 
+
+/* Declarations */
 Dec ::= VarDec:v
     {: RESULT = v; :}
 |		FunctionDec:func
