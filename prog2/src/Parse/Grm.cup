@@ -293,13 +293,3 @@ SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
 	|	SubscriptVar:sv LBRACK:l Exp:e RBRACK:r
 		{: RESULT = new Absyn.SubscriptVar(lleft, sv, e); :}
 	;
-
-
-/* DECLARATIONS */
-Dec ::= VarDec:v
-    {: RESULT = v; :}
-	|		FunctionDec:func
-    {: RESULT = func; :}
-	| 	TypeDec:t
-    {: RESULT = t; :}
-;
