@@ -47,6 +47,7 @@ non terminal Absyn.Exp 					ElseExp;
 non terminal Absyn.CallExp			CallExp;
 non terminal Absyn.ExpList			FunctionArgumentList;
 non terminal Absyn.ExpList			NextFunctionArgumentList;
+non terminal Absyn.RecordExp		RecordExp;
 non terminal Absyn.Var          Var;
 
 non terminal Absyn.VarDec				VarDec;
@@ -60,9 +61,16 @@ non terminal Absyn.NameTy				NameTy;
 non terminal Absyn.Ty 					Ty;
 non terminal Absyn.FieldList		FieldList;
 non terminal Absyn.FieldList 		NextFieldList;
+non terminal Absyn.FieldExpList	FieldExpList;
+non terminal Absyn.FieldExpList	NextFieldExpList;
 non terminal Absyn.FieldVar			FieldVar;
 non terminal Absyn.SubscriptVar	SubscriptVar;
 
+precedence nonassoc THEN;
+precedence nonassoc ELSE;
+precedence nonassoc ASSIGN;
+precedence left OR;
+precedence left AND;
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE;
 precedence nonassoc EQ, NEQ, LT, LE, GT, GE;
@@ -169,6 +177,10 @@ NextFunctionArgumentList ::=
 		{: RESULT = null; :}
 	| COMMA:c Exp:e NextFunctionArgumentList:l
 		{: RESULT = new Absyn.ExpList(e, l); :}
+	;
+
+RecordExp ::= ID:n LBRACE FieldExpList:l RBRACE
+		{: RESULT = new Absyn.RecordExp(nleft, sym(n), l); :}
 	;
 
 /* DECLARATIONS */
