@@ -54,8 +54,13 @@ To recursively run all the test at once run:
 ./diff all
 ```
 ##### Prog2
-
-More to come...
+To test your parser against the one provided from class:
+```bash
+cd src
+chmod u+x diff
+./diff <testname>
+./diff all
+```
 
 ### Help
 
