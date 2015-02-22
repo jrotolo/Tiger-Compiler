@@ -6,8 +6,8 @@ if [ "$@" = "all" ]; then
 		echo "----------------------------------"
 		java Parse.Main ../../CS4351/tiger/testcases/test"$i".tig > ../output1.txt
 		cd ../../CS4351/tiger/chap4
-		java Parse.Main ../testcases/test"$i".tig > ../../../output2.txt
-		cd ../../../../
+		java Parse.Main ../testcases/test"$i".tig > ../../../prog2/output2.txt
+		cd ../../../prog2
 		diff output1.txt output2.txt
 		rm output1.txt
 		rm output2.txt
@@ -21,8 +21,8 @@ else
 	echo "-----------------------------------"
 	java Parse.Main ../../CS4351/tiger/testcases/"$@".tig > ../output1.txt
 	cd ../../CS4351/tiger/chap4
-	java Parse.Main ../testcases/"$@".tig > ../../../output2.txt
-	cd ../../../../
+	java Parse.Main ../testcases/"$@".tig > ../../../prog2/output2.txt
+	cd ../../../prog2
 	diff output1.txt output2.txt
 	rm output1.txt
 	rm output2.txt
