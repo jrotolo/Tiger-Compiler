@@ -90,4 +90,3 @@ public class sym {
   static final int TypeDec = 21;
   static final int NextFunctionArgumentList = 16;
 }
-
