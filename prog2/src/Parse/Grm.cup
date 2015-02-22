@@ -274,7 +274,7 @@ NextFieldList ::=
 
 /* VARIABLES */
 
-Var ::=   ID:n
+Var ::= ID:n
 	  {: RESULT = new Absyn.SimpleVar(nleft, sym(n)); :}
 	|	FieldVar:fv
 		{: RESULT = fv; :}
@@ -284,7 +284,7 @@ Var ::=   ID:n
 
 FieldVar ::= Var:v DOT:d ID:n
 		{: RESULT = new Absyn.FieldVar(dleft, v, sym(n)); :}
-		;
+	;
 
 SubscriptVar ::= ID:n LBRACK:l Exp:e RBRACK:r
 		{: RESULT = new Absyn.SubscriptVar(lleft, new Absyn.SimpleVar(nleft, sym(n)), e); :}
