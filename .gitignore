@@ -5,3 +5,5 @@ CS4351/*
 *.tig
 src/Parse/*.class
 Yylex.java
+.profile
+.DS_Store
