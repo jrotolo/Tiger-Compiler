@@ -120,8 +120,6 @@ public class TransExp extends Trans {
 		return new ExpTy(null, VOID);
 	}
 
-	/* TODO: Implement the below stubbed methods */
-
 	public ExpTy transExp(Absyn.CallExp e) {
 		Entry entry = (Entry)env.venv.get(e.func);
 
@@ -152,6 +150,22 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.ForExp e) {
+		ExpTy loExpTy = transExp(e.var.init);
+		ExpTy hiExpTy = transExp(e.hi);
+
+		if (!(loExpTy.ty.coerceTo(INT) && hiExpTy.ty.coerceTo(INT)))
+			error(e.pos, "for loop parameters should be of type int");
+
+		env.venv.beginScope();
+
+		transDec(e.var);
+		ExpTy bodyExpTy = transExp(e.body);
+
+		if (!bodyExpTy.ty.coerceTo(VOID))
+			error(e.pos, "body of wa while loop should not have a value");
+
+		env.venv.endScope();
+
 		return new ExpTy(null, VOID);
 	}
 
@@ -169,7 +183,18 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.IfExp e) {
-		return new ExpTy(null, VOID);
+		ExpTy test = transExp(e.test);
+		checkInt(test, e.test.pos);
+
+		ExpTy thenClause = transExp(e.thenclause);
+
+		if (e.elseclause != null) {
+			ExpTy elseClause = transExp(e.elseclause);
+			if (!thenClause.ty.coerceTo(elseClause.ty))
+				error(e.pos, "if statement then/else does not match");
+			return thenClause;
+		}
+		return thenClause;
 	}
 
 	public ExpTy transExp(Absyn.IntExp e) {
@@ -177,7 +202,18 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.LetExp e) {
-		return new ExpTy(null, VOID);
+		env.venv.beginScope();
+		env.tenv.beginScope();
+
+		for (Absyn.DecList d = e.decs; d != null; d = d.tail)
+			transDec(d.head);
+
+		ExpTy body = transExp(e.body);
+		env.venv.endScope();
+		env.tenv.endScope();
+
+
+		return new ExpTy(null, body.ty);
 	}
 
 	public ExpTy transExp(Absyn.NilExp e) {
