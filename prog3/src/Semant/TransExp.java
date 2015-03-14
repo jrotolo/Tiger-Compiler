@@ -3,6 +3,7 @@ import Translate.Exp;
 import Types.Type;
 
 public class TransExp extends Trans {
+	TransVar transVarObj = new TransVar(env);
 
 	public TransExp(Env e) {
 		env = e;
@@ -132,7 +133,7 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.IntExp e) {
-		return new ExpTy(null, VOID);
+		return new ExpTy(null, INT);
 	}
 
 	public ExpTy transExp(Absyn.LetExp e) {
@@ -140,7 +141,7 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.NilExp e) {
-		return new ExpTy(null, VOID);
+		return new ExpTy(null, NIL);
 	}
 
 	public ExpTy transExp(Absyn.RecordExp e) {
@@ -152,12 +153,11 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.StringExp e) {
-		return new ExpTy(null, VOID);
+		return new ExpTy(null, STRING);
 	}
 
 	public ExpTy transExp(Absyn.VarExp e) {
-		//return transVar(e.var);
-		return new ExpTy(null, VOID);
+		return transVarObj.transVar(e.var);
 	}
 
 }

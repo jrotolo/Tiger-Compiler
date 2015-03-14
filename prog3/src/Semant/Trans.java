@@ -19,7 +19,7 @@ public abstract class Trans {
 		return transExpObj.transExp(e);
 	}
 
-/*	public void transDec(Absyn.Dec d) {
+	public void transDec(Absyn.Dec d) {
 		TransDec transDecObj = new TransDec(env);
 		transDecObj.transDec(d);
 	}
@@ -32,7 +32,7 @@ public abstract class Trans {
 	public ExpTy transVar(Absyn.Var v) {
 		TransVar transVarObj = new TransVar(env);
 		return transVarObj.transVar(v);
-	}*/
+	}
 
 	protected Exp checkInt(ExpTy et, int pos) {
 		if (!INT.coerceTo(et.ty))
