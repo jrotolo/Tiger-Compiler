@@ -1,49 +1,9 @@
 package Semant;
 
 import Absyn.*;
-// import Absyn.Absyn;
-// import Absyn.ArrayExp;
-// import Absyn.ArrayTy;
-// import Absyn.AssignExp;
-// import Absyn.BreakExp;
-// import Absyn.CallExp;
-// import Absyn.Dec;
-// import Absyn.DecList;
-// import ExpList;
-// import Absyn.FieldExpList;
-// import Absyn.FieldList;
-// import Absyn.FieldVar;
-// import Absyn.ForExp;
-// import Absyn.FunctionDec;
-// import Absyn.IfExp;
-// import Absyn.IntExp;
-// import Absyn.LetExp;
-// import Absyn.NameTy;
-// import Absyn.NilExp;
-// import Absyn.OpExp;
-// import Absyn.RecordExp;
-// import Absyn.RecordTy;
-// import Absyn.SeqExp;
-// import Absyn.SimpleVar;
-// import Absyn.StringExp;
-// import Absyn.SubscriptVar;
-// import Absyn.Ty;
-// import Absyn.TypeDec;
-// import Absyn.Var;
-// import Absyn.VarDec;
-// import Absyn.VarExp;
-// import Absyn.WhileExp;
 import ErrorMsg.ErrorMsg;
 import Symbol.*;
 import Types.*;
-// import Types.ARRAY;
-// import Types.INT;
-// import Types.NAME;
-// import Types.NIL;
-// import Types.RECORD;
-// import Types.STRING;
-// import Types.Type;
-// import Types.VOID;
 import java.util.Hashtable;
 
 public class Semant
@@ -248,48 +208,34 @@ public class Semant
     ExpTy result;
     if (e == null)
       return new ExpTy(null, VOID);
-    if ((e instanceof VarExp)) {
+    if ((e instanceof VarExp))
       result = transExp((VarExp)e);
-    }
-    else if ((e instanceof NilExp)) {
+    else if ((e instanceof NilExp))
         result = transExp((NilExp)e);
-    }
-    else if ((e instanceof IntExp)) {
+    else if ((e instanceof IntExp))
         result = transExp((IntExp)e);
-    }
-    else if ((e instanceof StringExp)) {
+    else if ((e instanceof StringExp))
         result = transExp((StringExp)e);
-    }
-    else if ((e instanceof CallExp)) {
+    else if ((e instanceof CallExp))
         result = transExp((CallExp)e);
-    }
-    else if ((e instanceof OpExp)) {
+    else if ((e instanceof OpExp))
         result = transExp((OpExp)e);
-    }
-    else if ((e instanceof RecordExp)) {
+    else if ((e instanceof RecordExp))
         result = transExp((RecordExp)e);
-    }
-    else if ((e instanceof SeqExp)) {
+    else if ((e instanceof SeqExp))
         result = transExp((SeqExp)e);
-    }
-    else if ((e instanceof AssignExp)) {
+    else if ((e instanceof AssignExp))
         result = transExp((AssignExp)e);
-    }
-    else if ((e instanceof IfExp)) {
+    else if ((e instanceof IfExp))
         result = transExp((IfExp)e);
-    }
-    else if ((e instanceof WhileExp)) {
+    else if ((e instanceof WhileExp))
         result = transExp((WhileExp)e);
-    }
-    else if ((e instanceof ForExp)) {
+    else if ((e instanceof ForExp))
         result = transExp((ForExp)e);
-    }
-    else if ((e instanceof BreakExp)) {
+    else if ((e instanceof BreakExp))
         result = transExp((BreakExp)e);
-    }
-    else if ((e instanceof LetExp)) {
+    else if ((e instanceof LetExp))
         result = transExp((LetExp)e);
-    }
     else if ((e instanceof ArrayExp))
         result = transExp((ArrayExp)e);
     else
