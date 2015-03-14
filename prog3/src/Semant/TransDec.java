@@ -3,7 +3,7 @@ import Translate.Exp;
 import Types.Type;
 
 public class TransDec extends Trans {
-	
+
 	public TransDec(Env e) {
 		env = e;
 	}
@@ -18,6 +18,8 @@ public class TransDec extends Trans {
 		else
 			throw new Error("TransDec.transDec");
 	}
+
+	/* TODO: Implement the below stubbed methods */
 
 	public void transDec(Absyn.FunctionDec d) {
 

@@ -3,7 +3,7 @@ import Translate.Exp;
 import Types.Type;
 
 public class TransVar extends Trans {
-	
+
 	public TransVar(Env e) {
 		env = e;
 	}
@@ -19,6 +19,8 @@ public class TransVar extends Trans {
 			throw new Error("TransVar.transVar");
 	}
 
+	/* TODO: Implement the below stubbed methods */
+	
 	public ExpTy transVar(Absyn.FieldVar v) {
 		return new ExpTy(null, VOID);
 	}

@@ -3,7 +3,7 @@ import Translate.Exp;
 import Types.Type;
 
 public class TransTy extends Trans {
-	
+
 	public TransTy(Env e) {
 		env = e;
 	}
@@ -18,6 +18,8 @@ public class TransTy extends Trans {
 		else throw new Error("TransTy.transTy");
 	}
 
+	/* TODO: Implement the below stubbed methods */
+
 	public Type transTy(Absyn.ArrayTy t) {
 		Types.NAME type = (Types.NAME)env.tenv.get(t.typ);
 		return new Types.ARRAY(type);
@@ -31,5 +33,5 @@ public class TransTy extends Trans {
 	public Type transTy(Absyn.RecordTy t) {
 		return new Types.NIL();
 	}
-		
+
 }

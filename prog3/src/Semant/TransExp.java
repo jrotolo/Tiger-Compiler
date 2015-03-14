@@ -3,7 +3,7 @@ import Translate.Exp;
 import Types.Type;
 
 public class TransExp extends Trans {
-	
+
 	public TransExp(Env e) {
 		env = e;
 	}
@@ -47,7 +47,7 @@ public class TransExp extends Trans {
 		e.type = result.ty;
 		return result;
 	}
-	
+
 	/*
 	 * TransExp Overrides
 	 */
@@ -98,12 +98,14 @@ public class TransExp extends Trans {
 		}
 
 		Type element = ((Types.ARRAY)type.actual()).element;
-		
+
 		if (!init.ty.coerceTo(element))
 			error(e.init.pos, "initial element does not match array's type");
 
 		return new ExpTy(null, type);
 	}
+
+	/* TODO: Implement the below stubbed methods */
 
 	public ExpTy transExp(Absyn.AssignExp e) {
 		return new ExpTy(null, VOID);
@@ -157,5 +159,5 @@ public class TransExp extends Trans {
 		//return transVar(e.var);
 		return new ExpTy(null, VOID);
 	}
-	
+
 }
