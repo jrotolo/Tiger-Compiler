@@ -156,6 +156,15 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.WhileExp e) {
+		ExpTy testType = transExp(e.test);
+		ExpTy bodyType = transExp(e.body);
+
+		if (!testType.ty.coerceTo(INT))
+			error(e.test.pos, "test should be an integer");
+
+		if (!bodyType.ty.coerceTo(VOID))
+			error(e.body.pos, "a while loop should not be value");
+
 		return new ExpTy(null, VOID);
 	}
 
@@ -180,7 +189,12 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.SeqExp e) {
-		return new ExpTy(null, VOID);
+		ExpTy expTy = transExp(e.list.head);
+
+		if (e.list.tail == null)
+			return expTy;
+		else
+			return transExp(new Absyn.SeqExp(e.list.tail.head.pos, e.list.tail));
 	}
 
 	public ExpTy transExp(Absyn.StringExp e) {
