@@ -185,7 +185,33 @@ public class TransExp extends Trans {
 	}
 
 	public ExpTy transExp(Absyn.RecordExp e) {
-		return new ExpTy(null, VOID);
+		Types.NAME type = (Types.NAME)env.tenv.get(e.typ);
+
+		if (type == null || !(type.actual() instanceof Types.RECORD)) {
+			error(e.pos, "Record type undefined: " + e.typ);
+			return new ExpTy(null, VOID);
+		}
+
+		Types.RECORD record = (Types.RECORD)type.actual();
+
+		for (Absyn.FieldExpList field = e.fields; field != null; field = field.tail) {
+			ExpTy value = transExp(field.init);
+
+			if (record == null)
+				error(e.pos, "too many arguments for record type: " + e.typ);
+			else if (field.name != record.fieldName)
+				error(e.pos, "field names are not aligned");
+			else if (!value.ty.coerceTo(record.fieldType))
+				error(e.pos, "field types do not match");
+
+			if (record != null) 
+				record = record.tail;
+		}
+		
+		if (record != null)
+			error(e.pos, "not enough arguments for record type: " + e.typ);
+
+		return new ExpTy(null, type);
 	}
 
 	public ExpTy transExp(Absyn.SeqExp e) {
