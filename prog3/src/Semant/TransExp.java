@@ -106,9 +106,13 @@ public class TransExp extends Trans {
 		return new ExpTy(null, type);
 	}
 
-	/* TODO: Implement the below stubbed methods */
-
 	public ExpTy transExp(Absyn.AssignExp e) {
+		ExpTy varTy = transVarObj.transVar(e.var);
+		ExpTy expTy = transVarObj.transExp(e.exp);
+
+		if (!varTy.ty.coerceTo(expTy.ty))
+			error(e.pos, "assigment types do not match");
+
 		return new ExpTy(null, VOID);
 	}
 
@@ -116,8 +120,35 @@ public class TransExp extends Trans {
 		return new ExpTy(null, VOID);
 	}
 
+	/* TODO: Implement the below stubbed methods */
+
 	public ExpTy transExp(Absyn.CallExp e) {
-		return new ExpTy(null, VOID);
+		Entry entry = (Entry)env.venv.get(e.func);
+
+		if (entry == null | !(entry instanceof FunEntry)) {
+			error(e.pos, "undefinded function: " + e.func);
+			return new ExpTy(null, VOID);
+		}
+
+		FunEntry funEntry = (FunEntry)entry;
+		Absyn.ExpList argument = e.args;
+		Types.RECORD record = funEntry.formals;
+		
+		while (argument != null) {
+			ExpTy argumentTy = transExp(argument.head);
+			if (record == null) 
+				error(argument.head.pos, "too many arguments");
+			else if (!argumentTy.ty.coerceTo(record.fieldType))
+				error(argument.head.pos, "argument is of wrong type");
+
+			argument = argument.tail;
+			record = record.tail;
+		}
+
+		if (record != null)
+			error(e.pos, "Not enough arguments");
+
+		return new ExpTy(null, funEntry.result);
 	}
 
 	public ExpTy transExp(Absyn.ForExp e) {
