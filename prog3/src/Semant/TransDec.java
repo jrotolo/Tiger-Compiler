@@ -8,7 +8,7 @@ public class TransDec extends Trans {
 		env = e;
 	}
 
-	TransDec transDecObj = new TransDec(env);
+	TransTy transTyObj = new TransTy(env);
 
 	public void transDec(Absyn.Dec d) {
 		if (d instanceof Absyn.FunctionDec)
@@ -54,7 +54,7 @@ public class TransDec extends Trans {
 			// Figure out the return type
 			Type returnType = VOID;
 			if (func.result != null)
-				returnType = transDecObj.transTy(func.result);
+				returnType = transTyObj.transTy(func.result);
 
 			// Add function to environment
 			func.entry = new FunEntry(initialField, returnType);
@@ -97,7 +97,7 @@ public class TransDec extends Trans {
 
 		// If it is specified, translate it and check compatibility
 		else {
-			type = transDecObj.transTy(d.typ);
+			type = transTyObj.transTy(d.typ);
 			if (!init.ty.coerceTo(type))
 				error(d.pos, "types are not compatible");
 		}
@@ -111,7 +111,7 @@ public class TransDec extends Trans {
 	public void transDec(Absyn.TypeDec d) {
 		// Create the NAME object
 		Types.NAME name = new Types.NAME(d.name);
-		name.bind(transDecObj.transTy(d.ty));
+		name.bind(transTyObj.transTy(d.ty));
 		d.entry = name;
 
 		// Put type dec in the env
