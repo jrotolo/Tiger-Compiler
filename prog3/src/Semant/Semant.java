@@ -39,6 +39,18 @@ public class Semant {
       result = transExp((Absyn.OpExp)e);
     else if (e instanceof Absyn.LetExp)
       result = transExp((Absyn.LetExp)e);
+		else if (e instanceof Absyn.IntExp)
+			result = transExp((Absyn.IntExp)e);
+		else if (e instanceof Absyn.StringExp)
+			result = transExp((Absyn.StringExp)e);
+		else if (e instanceof Absyn.SeqExp)
+			result = transExp((Absyn.SeqExp)e);
+		else if (e instanceof Absyn.ArrayExp)
+			result = transExp((Absyn.ArrayExp)e);
+		else if (e instanceof Absyn.NilExp)
+			result = transExp((Absyn.NilExp)e);
+		else if (e instanceof Absyn.RecordExp)
+			result = transExp((Absyn.RecordExp)e);
     else throw new Error("Semant.transExp");
     e.type = result.ty;
     return result;
