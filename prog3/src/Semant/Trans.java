@@ -10,7 +10,7 @@ public abstract class Trans {
 
 	Env env;
 
-	private void error(int pos, String msg) {
+	protected void error(int pos, String msg) {
 		env.errorMsg.error(pos, msg);
 	}
 
