@@ -35,6 +35,7 @@ public class Semant {
     throw new Error("Semant.transDec");
   }
 
+  // Loop through the functions to statisfy all the definitions
   Translate.Exp transDec(FunctionDec d) {
     Hashtable hash = new Hashtable();
     for (FunctionDec f = d; f != null; f = f.next) {
@@ -42,6 +43,7 @@ public class Semant {
         error(f.pos, "function redeclared");
       RECORD fields = transTypeFields(new Hashtable(), f.params);
       Type type = transTy(f.result);
+      // Add the function to the environment
       f.entry = new FunEntry(fields, type);
       this.env.venv.put(f.name, f.entry);
     }
@@ -58,6 +60,7 @@ public class Semant {
     return null;
   }
 
+  // Go through the type decs and process them recursively
   Translate.Exp transDec(TypeDec d) {
     Hashtable hash = new Hashtable();
     for (TypeDec type = d; type != null; type = type.next) {
@@ -80,18 +83,23 @@ public class Semant {
     return null;
   }
 
+  // Translate the value being assigned to the variable
   Translate.Exp transDec(VarDec d) {
     ExpTy init = transExp(d.init);
     Type type;
     if (d.typ == null) {
       if (init.ty.coerceTo(NIL))
         error(d.pos, "record type expected");
+        // If the type is not explicit, just use the initial value's type
       type = init.ty;
-    } else {
+    }
+    else {
+        // If the type is explicit, translate the type and check that it is compatible
       type = transTy(d.typ);
       if (!init.ty.coerceTo(type))
         error(d.pos, "assignment type mismatch");
     }
+    // Add the variable to the variable environment
     d.entry = new VarEntry(type);
     this.env.venv.put(d.name, d.entry);
     return null;
