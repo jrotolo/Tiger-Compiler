@@ -21,9 +21,6 @@ public class TransDec extends Trans {
 			throw new Error("TransDec.transDec");
 	}
 
-	/* TODO: Implement the below stubbed methods */
-
-
 	public void transDec(Absyn.FunctionDec d) {
 		Absyn.FunctionDec func = d;
 		while (func != null) {
