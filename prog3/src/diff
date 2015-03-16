@@ -1,0 +1,34 @@
+#!/bin/bash
+
+if [ "$@" = "all" ]; then
+	for i in `seq 1 49`; do
+		echo "Starting test$i...."
+		echo "----------------------------------"
+		java Parse.Main ../../CS4351/pub/tiger/testcases/test"$i".tig > ../output1.txt
+		cd ../../CS4351/pub/tiger/chap5
+		java Parse.Main ../testcases/test"$i".tig > ../../../../prog3/output2.txt
+		cd ../../../../prog3
+		diff output1.txt output2.txt
+		rm output1.txt
+		rm output2.txt
+		cd src/
+		echo "Diff completed. If you don't see anything then the test passed!"
+		echo "----------------------------------"
+		echo ""
+	done
+else	
+	echo "Starting $@...."
+	echo "-----------------------------------"
+	java Parse.Main ../../CS4351/pub/tiger/testcases/"$@".tig > ../output1.txt
+	cd ../../CS4351/pub/tiger/chap5
+	java Parse.Main ../testcases/"$@".tig > ../../../prog3/output2.txt
+	cd ../../../prog3
+	diff output1.txt output2.txt
+	rm output1.txt
+	rm output2.txt
+	echo "Diff completed. If you don't see anything then the test passed!"
+	echo "-----------------------------------"
+fi
+
+
+
