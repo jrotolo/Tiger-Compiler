@@ -1,0 +1,9 @@
+CSC-4351 - Tiger Compiler - Type Checker
+By: Jarrod Rotolo and Caleb Leger
+
+Type checker fully implemented. Could be a few missing edge cases.
+
+Testing
+
+To test the application you can use the diff script to run my type checker against the class implementation.
+
