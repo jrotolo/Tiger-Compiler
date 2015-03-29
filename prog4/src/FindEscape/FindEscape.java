@@ -122,20 +122,73 @@ public class FindEscape {
 
   void traverseExp(int depth, Absyn.IntExp e) { }
 
-  void traverseExp(int depth, Absyn.LetExp e) {}
+  void traverseExp(int depth, Absyn.LetExp e) {
+    escEnv.beginScope();
+
+    for (Absyn.DecList dec = e.decs; dec != null; dec = dec.tail) {
+      traverseDec(depth, dec.head);
+    }
+
+    traverseExp(depth, e.body);
+    escEnv.endScope();
+  }
+
   void traverseExp(int depth, Absyn.NilExp e) {}
-  void traverseExp(int depth, Absyn.OpExp e) {}
-  void traverseExp(int depth, Absyn.RecordExp e) {}
-  void traverseExp(int depth, Absyn.SeqExp e) {}
+
+  void traverseExp(int depth, Absyn.OpExp e) {
+    traverseExp(depth, e.left);
+    traverseExp(depth, e.right);
+  }
+
+  void traverseExp(int depth, Absyn.RecordExp e) {
+    for (Absyn.FieldExpList field = e.fields; field != null; field = field.tail)
+      traverseExp(depth, field.init);
+  }
+
+  void traverseExp(int depth, Absyn.SeqExp e) {
+    for (Absyn.ExpList expList = e.list; expList != null; expList = expList.tail)
+      traverseExp(depth, expList.head);
+  }
+
   void traverseExp(int depth, Absyn.StringExp e) {}
-  void traverseExp(int depth, Absyn.VarExp e) {}
-  void traverseExp(int depth, Absyn.WhileExp e) {}
+
+  void traverseExp(int depth, Absyn.VarExp e) {
+    traverseVar(depth, e.var);
+  }
+
+  void traverseExp(int depth, Absyn.WhileExp e) {
+    traverseExp(depth, e.test);
+    traverseExp(depth, e.body);
+  }
 
 
 
   // TRAVERSEDEC METHODS
-  void traverseDec(int depth, Absyn.FunctionDec d) {}
+  void traverseDec(int depth, Absyn.FunctionDec d) {
+    Absyn.FunctionDec oldParentFunction = parentFunction;
+    depth = depth + 1;
+
+    // Loop through the functions
+    for (Absyn.FunctionDec function = d; function != null; function = function.next) {
+      parentFunction = function;
+      escEnv.beginScope();
+
+      for (Absyn.FieldList param = function.params; param != null; param = param.tail)
+        escEnv.put(param.name, new FormalEscape(depth, param));
+
+      traverseExp(depth, function.body);
+
+      escEnv.endScope();
+    }
+
+    parentFunction = oldParentFunction;
+  }
+
   void traverseDec(int depth, Absyn.TypeDec d) {}
-  void traverseDec(int depth, Absyn.VarDec d) {}
+
+  void traverseDec(int depth, Absyn.VarDec d) {
+    traverseExp(depth, d.init);
+    escEnv.put(d.name, new VarEscape(depth, d));
+  }
 
 }
