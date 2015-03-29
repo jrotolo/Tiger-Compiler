@@ -207,7 +207,7 @@ public class Semant {
     case Absyn.OpExp.NE:
       checkComparable(left, e.left.pos);
       checkComparable(right, e.right.pos);
-      if (!left.ty.coerceTo(right.ty) && !right.ty.coerceTo(left.ty)) 
+      if (!left.ty.coerceTo(right.ty) && !right.ty.coerceTo(left.ty))
 	error(e.pos, "incompatible operands to equality operator");
       return new ExpTy(null, INT);
     case Absyn.OpExp.LT:
@@ -376,9 +376,6 @@ public class Semant {
 
   Exp transDec(Absyn.TypeDec d) {
     // 1st pass - handles the type headers
-    // Using a local hashtable, check if there are two types 
-    // with the same name in the same (consecutive) batch 
-    // of mutually recursive types. See test38.tig!
     Hashtable hash = new Hashtable();
     for (Absyn.TypeDec type = d; type != null; type = type.next) {
       if (hash.put(type.name, type.name) != null)
