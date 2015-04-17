@@ -91,22 +91,27 @@ public class Translate {
     return new Ex(CONST(0));
   }
 
+  // TODO: Implement
   public Exp SimpleVar(Access access, Level level) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp FieldVar(Exp record, int index) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp SubscriptVar(Exp array, Exp index) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp NilExp() {
     return Error();
   }
 
+  // TODO: Implement
   public Exp IntExp(int value) {
     return Error();
   }
@@ -128,6 +133,8 @@ public class Translate {
   private Tree.Exp CallExp(Symbol f, ExpList args, Level from) {
     return frame.externalCall(f.toString(), ExpList(args));
   }
+
+  // TODO: Implement
   private Tree.Exp CallExp(Level f, ExpList args, Level from) {
     throw new Error("Translate.CallExp unimplemented");
   }
@@ -145,50 +152,62 @@ public class Translate {
     return new Nx(UEXP(CallExp(f, args, from)));
   }
 
+  // TODO: Implement
   public Exp OpExp(int op, Exp left, Exp right) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp StrOpExp(int op, Exp left, Exp right) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp RecordExp(ExpList init) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp SeqExp(ExpList e) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp AssignExp(Exp lhs, Exp rhs) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp IfExp(Exp cc, Exp aa, Exp bb) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp WhileExp(Exp test, Exp body, Label done) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp ForExp(Access i, Exp lo, Exp hi, Exp body, Label done) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp BreakExp(Label done) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp LetExp(ExpList lets, Exp body) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp ArrayExp(Exp size, Exp init) {
     return Error();
   }
 
+  // TODO: Implement
   public Exp VarDec(Access a, Exp init) {
     return Error();
   }

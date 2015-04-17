@@ -9,11 +9,12 @@ class IfThenElseExp extends Exp {
   Label join = new Label();
 
   IfThenElseExp(Exp cc, Exp aa, Exp bb) {
-    cond = cc; 
-    a = aa; 
+    cond = cc;
+    a = aa;
     b = bb;
   }
 
+  // TODO: Implement
   Tree.Stm unCx(Label tt, Label ff) {
     // This is the naive implementation; you should extend it to eliminate
     // unnecessary JUMP nodes
@@ -33,11 +34,13 @@ class IfThenElseExp extends Exp {
 				     new Tree.SEQ(new Tree.LABEL(f), bStm)));
   }
 
+  // TODO: Implement
   Tree.Exp unEx() {
     // You must implement this function
     return new Tree.CONST(0);
   }
 
+  // TODO: Implement
   Tree.Stm unNx() {
     // You must implement this function
     return null;
