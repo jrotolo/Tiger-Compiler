@@ -1,6 +1,7 @@
 package Translate;
 import Temp.Temp;
 import Temp.Label;
+import Tree.*;
 
 class IfThenElseExp extends Exp {
   Exp cond, a, b;
@@ -19,7 +20,25 @@ class IfThenElseExp extends Exp {
     // This is the naive implementation; you should extend it to eliminate
     // unnecessary JUMP nodes
     Tree.Stm aStm = a.unCx(tt, ff);
+    // starting function extension
+    if (aStm instanceof JUMP) {
+        JUMP aJump = (JUMP)aStm;
+        if (aJump.exp instanceof NAME) {
+            NAME aName = (NAME)aJump.exp;
+            aStm = null;
+            t = aName.label;
+        }
+    }
     Tree.Stm bStm = b.unCx(tt, ff);
+    // starting function extension
+    if (bStm instanceof JUMP) {
+        JUMP bJump = (JUMP)bStm;
+        if (bJump.exp instanceof NAME) {
+            NAME bName = (NAME)bJump.exp;
+            bStm = null;
+            t = bName.label;
+        }
+    }
 
     Tree.Stm condStm = cond.unCx(t, f);
 
@@ -43,6 +62,27 @@ class IfThenElseExp extends Exp {
   // TODO: Implement
   Tree.Stm unNx() {
     // You must implement this function
-    return null;
+    Stm aStm = a.unNx();
+    if (aStm == null)
+        t = join;
+    else
+        aStm = new SEQ(new SEQ(new LABEL(t), aStm), new JUMP(join));
+
+    Stm bStm = b.unNx();
+    if (bStm == null)
+        f = join;
+    else
+        bStm = new SEQ(new SEQ(new LABEL(f), bStm), new JUMP(join));
+
+    if (aStm == null && bStm == null)
+        return cond.unNx();
+
+    Stm condStm = cond.unCx(t, f);
+    if (aStm == null)
+        return new SEQ(new SEQ(condStm, bStm), new LABEL(join));
+    if (bStm == null)
+        return new SEQ(new SEQ(condStm, aStm), new LABEL(join));
+
+    return new SEQ(new SEQ(condStm, new SEQ(aStm, bStm)), new LABEL(join));
   }
 }
