@@ -49,23 +49,23 @@ class IfThenElseExp extends Exp {
     if (bStm == null)
       return new Tree.SEQ(condStm, new Tree.SEQ(new Tree.LABEL(t), aStm));
     return new Tree.SEQ(condStm,
-			new Tree.SEQ(new Tree.SEQ(new Tree.LABEL(t), aStm),
-				     new Tree.SEQ(new Tree.LABEL(f), bStm)));
+		new Tree.SEQ(new Tree.SEQ(new Tree.LABEL(t), aStm),
+			new Tree.SEQ(new Tree.LABEL(f), bStm)));
   }
 
   // TODO: Implement
   Tree.Exp unEx() {
-    Temp t = new Temp();
+    Temp tmp = new Temp();
     Tree.Exp aExp = a.unEx();
     if (aExp == null)
         return null;
     Tree.Exp bExp = b.unEx();
     if (bExp == null)
         return null;
-    return new ESEQ(new SEQ(new SEQ(this.cond.unCx(this.t, this.f),
-        new SEQ(new SEQ(new LABEL(this.t), new SEQ(new MOVE(new TEMP(t), aExp),
-            new JUMP(join))), new SEQ(new MOVE(new TEMP(t), bExp), new JUMP(join))))),
-                new LABEL(join), new TEMP(t));
+    return new ESEQ(new SEQ(new SEQ(cond.unCx(t, f), new SEQ(new SEQ(new LABEL(t),
+        new SEQ(new MOVE(new TEMP(tmp), aExp), new JUMP(join))),
+            new SEQ(new LABEL(f), new SEQ(new MOVE(new TEMP(tmp), bExp),
+                new JUMP(join))))), new LABEL(join)), new TEMP(tmp));
   }
 
   // TODO: Implement
