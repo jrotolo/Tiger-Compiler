@@ -101,16 +101,17 @@ public class Translate {
 			currentLevel = level.parent;
 		}
 
-		Tree.Exp location = access.acc.exp(framePoiner);
+		Tree.Exp location = access.acc.exp(framePointer);
 		return new Ex(location);
   }
 
   public Exp FieldVar(Exp record, int index) {
 		int offset = index * frame.wordSize();
+    Temp pointerRegister = new Temp();
 
-		Temp.Stm movePointerStm = MOV(TEMP(pointerRegister), record.unEx());
-		Tree .Exp loadPointerExp = MEM(BINOP(Tree.BINOP.PLUS, TEMP(pointerRegister), CONST(offset)));
-		return new Ex(ESEQ(movePointerStm, loadPointerExp);
+		Tree.Stm movePointerStm = MOVE(TEMP(pointerRegister), record.unEx());
+		Tree.Exp loadPointerExp = MEM(BINOP(Tree.BINOP.PLUS, TEMP(pointerRegister), CONST(offset)));
+		return new Ex(ESEQ(movePointerStm, loadPointerExp));
   }
 
   public Exp SubscriptVar(Exp array, Exp index) {
@@ -199,14 +200,14 @@ public class Translate {
   }
 
 	Tree.Stm recordFields(ExpList field, Temp initialLocaton, int offset) {
-		Treem.Stm moveCurrentFieldStm = MOVE(MEM(BINOP(Tree.BINOP.PLUS, TEMP(initialLocation), CONST(offset))), field.head.unEx());
-		
+		Tree.Stm moveCurrentFieldStm = MOVE(MEM(BINOP(Tree.BINOP.PLUS, TEMP(initialLocaton), CONST(offset))), field.head.unEx());
+
 		if (field.head == null)
 			return null;
 		else if (field.tail == null)
 			return moveCurrentFieldStm;
 		else {
-			Tree.Stm nextField = recordFields(field.tail, initialLocation, offset + frame.wordSize());
+			Tree.Stm nextField = recordFields(field.tail, initialLocaton, offset + frame.wordSize());
 			return SEQ(moveCurrentFieldStm, nextField);
 		}
 	}
@@ -218,7 +219,7 @@ public class Translate {
 			return new Ex(e.head.unEx());
 		else {
 			Tree.Stm left = e.head.unNx();
-			Tree.Stm right = SeqExp(e.tail).unEx();
+			Tree.Exp right = SeqExp(e.tail).unEx();
 			return new Ex(ESEQ(left, right));
 		}
   }
@@ -282,7 +283,7 @@ public class Translate {
 		Tree.Exp framePointer = TEMP(a.home.frame.FP());
 		Tree.Exp destination = a.acc.exp(framePointer);
 		Tree.Exp initialValue = init.unEx();
-		
+
 		return new Nx(MOVE(destination, initialValue));
   }
 
