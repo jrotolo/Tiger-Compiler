@@ -91,7 +91,6 @@ public class Translate {
     return new Ex(CONST(0));
   }
 
-  // TODO: Implement
   public Exp SimpleVar(Access access, Level level) {
 		Tree.Exp framePointer = TEMP(frame.FP());
 		Level currentLevel = level;
@@ -255,7 +254,6 @@ public class Translate {
 		return new Nx(SEQ(left, LABEL(done)));
   }
 
-  // TODO: Implement
   public Exp ForExp(Access i, Exp lo, Exp hi, Exp body, Label done) {
     return Error();
   }
