@@ -55,8 +55,17 @@ class IfThenElseExp extends Exp {
 
   // TODO: Implement
   Tree.Exp unEx() {
-    // You must implement this function
-    return new Tree.CONST(0);
+    Temp t = new Temp();
+    Tree.Exp aExp = a.unEx();
+    if (aExp == null)
+        return null;
+    Tree.Exp bExp = b.unEx();
+    if (bExp == null)
+        return null;
+    return new ESEQ(new SEQ(new SEQ(this.cond.unCx(this.t, this.f),
+        new SEQ(new SEQ(new LABEL(this.t), new SEQ(new MOVE(new TEMP(t), aExp),
+            new JUMP(join))), new SEQ(new MOVE(new TEMP(t), bExp), new JUMP(join))))),
+                new LABEL(join), new TEMP(t));
   }
 
   // TODO: Implement
