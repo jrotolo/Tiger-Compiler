@@ -46,7 +46,7 @@ public class Codegen {
   }
 
   void munchStm(Tree.Stm s) {
-    if (s instanceof Tree.MOVE) 
+    if (s instanceof Tree.MOVE)
       munchStm((Tree.MOVE)s);
     else if (s instanceof Tree.EXP)
       munchStm((Tree.EXP)s);
@@ -154,8 +154,20 @@ public class Codegen {
     return frame.ZERO;
   }
 
+  // MEM(BINOP(PLUS,e1,CONST(i)))
   Temp munchExp(Tree.MEM e) {
-    return frame.ZERO;
+    if (e.exp instanceof Tree.CONST)
+      return munchExp(e, (Tree.CONST)e.exp);
+
+    Temp r = new Temp();
+    emit(OPER("LOAD `d0 (`s0)\n", L(r, null), L(munchExp(e.exp))));
+    return r;
+  }
+
+  Temp munchExp(Tree.MEM e, Tree.CONST c) {
+    Temp r = new Temp();
+    emit(OPER("LOAD `d0 " + c.value, L(r), null));
+    return r;
   }
 
   Temp munchExp(Tree.CALL s) {
